@@ -1,0 +1,3261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Storyline · Career Architecture · Changemaker Career Coaching</title>
+<!--
+  Storyline concept "TERRAIN"
+  Career Architecture · Module 04 · Storyline
+  Changemaker Career Coaching · 2026
+-->
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=DM+Mono:wght@400;500;700&family=Cormorant+Garamond:ital,wght@1,400;1,500;1,600&display=swap" rel="stylesheet">
+<style>
+
+/* ═══════════════════════════════════════════════════════════ */
+/* TOKENS                                                       */
+/* ═══════════════════════════════════════════════════════════ */
+:root{
+  /* Base */
+  --teal:#0B3948; --teal-d:#072530; --teal-m:#5DA7B2; --teal-l:#C8E6EA;
+  --gold:#9F8252; --gold-d:#7A6038; --gold-l:#F0E6D6;
+  --flora:#FFFCF2; --sand:#EDE9E1; --cream:#FAF6ED;
+  --text:#0A0A0A; --grey-d:#3D3A36; --grey-m:#6B6862; --grey-l:#C8C4B8;
+
+  /* Accents */
+  --orange:#EA580C; --orange-l:#FFEDD5; --orange-d:#C2410C;
+  --berry:#C93B6B; --berry-l:#FDE2EC;
+  --aurora:#0D9488; --aurora-l:#CCFBF1; --aurora-d:#0F766E;
+  --moss:#4D7C0F; --moss-l:#ECFCCB; --moss-d:#365314;
+  --plum:#7C3AED; --plum-l:#EDE9FE; --plum-d:#5B21B6;
+
+  /* Storyline red — the red thread that runs through everything */
+  --story:#DC2626; --story-d:#991B1B; --story-l:#FEE2E2;
+
+  /* Arc aliases (B1·B2·B3) — semantically readable */
+  --b1:var(--orange);   --b1-d:var(--orange-d); --b1-l:var(--orange-l);
+  --b2:var(--gold);     --b2-d:var(--gold-d);   --b2-l:var(--gold-l);
+  --b3:var(--moss);     --b3-d:var(--moss-d);   --b3-l:var(--moss-l);
+
+  /* Typo */
+  --serif:'DM Serif Display',serif;
+  --sans:'DM Sans',sans-serif;
+  --mono:'DM Mono',monospace;
+  --italic:'Cormorant Garamond',serif;
+  --pad-page:clamp(24px,5vw,80px);
+  --max-w:1380px;
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* RESET & BASE                                                 */
+/* ═══════════════════════════════════════════════════════════ */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{
+  font-family:var(--sans);
+  font-size:16.5px;
+  line-height:1.6;
+  color:var(--text);
+  background:var(--flora);
+  font-feature-settings:"ss01","ss02";
+  -webkit-font-smoothing:antialiased;
+  overflow-x:hidden;
+}
+button{font-family:inherit;border:none;background:none;cursor:pointer;color:inherit;}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* TOPOGRAPHY LAYER (background texture)                        */
+/* ═══════════════════════════════════════════════════════════ */
+.topo-layer{
+  position:absolute;
+  inset:0;
+  z-index:0;
+  pointer-events:none;
+  opacity:.8;
+  overflow:hidden;
+}
+.topo-layer svg{
+  width:100%;
+  height:100%;
+  display:block;
+}
+.topo-line{
+  fill:none;
+  stroke:var(--gold);
+  stroke-width:.8;
+  opacity:.55;
+}
+.topo-line.story{
+  stroke:var(--story);
+  stroke-width:1;
+  opacity:.18;
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* HERO                                                         */
+/* ═══════════════════════════════════════════════════════════ */
+.hero{
+  position:relative;
+  min-height:100vh;
+  padding:clamp(64px,9vh,120px) var(--pad-page) clamp(80px,12vh,160px);
+  display:flex;
+  align-items:center;
+  background:
+    radial-gradient(circle at 88% 12%, rgba(220,38,38,.10) 0%, transparent 42%),
+    radial-gradient(circle at 12% 88%, rgba(77,124,15,.10) 0%, transparent 48%),
+    radial-gradient(circle at 78% 78%, rgba(234,88,12,.08) 0%, transparent 45%),
+    radial-gradient(circle at 22% 22%, rgba(159,130,82,.07) 0%, transparent 55%),
+    var(--flora);
+  overflow:hidden;
+}
+.hero::before{
+  content:'';
+  position:absolute;
+  top:9%; right:7%;
+  width:22px; height:22px;
+  background:var(--story);
+  border-radius:50%;
+  opacity:.85;
+  box-shadow:0 0 0 8px rgba(220,38,38,.15);
+  z-index:1;
+}
+.hero::after{
+  content:'';
+  position:absolute;
+  bottom:14%; left:10%;
+  width:14px; height:14px;
+  background:var(--moss);
+  border-radius:50%;
+  opacity:.75;
+  box-shadow:0 0 0 6px rgba(77,124,15,.18);
+  z-index:1;
+}
+.hero-inner{
+  position:relative;
+  z-index:2;
+  max-width:var(--max-w);
+  margin:0 auto;
+  width:100%;
+  display:grid;
+  grid-template-columns:1.25fr .85fr;
+  gap:clamp(40px,6vw,100px);
+  align-items:center;
+}
+@media (max-width:900px){
+  .hero-inner{grid-template-columns:1fr;}
+}
+
+.hero-eyebrow{
+  font-family:var(--mono);
+  font-size:14px;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--story-d);
+  margin-bottom:40px;
+  display:inline-flex;
+  align-items:center;
+  gap:14px;
+}
+.hero-eyebrow::before{
+  content:'';
+  display:block;
+  width:56px;
+  height:2px;
+  background:var(--story);
+}
+
+.hero-title{
+  font-family:var(--serif);
+  font-size:clamp(72px,13vw,200px);
+  line-height:.88;
+  letter-spacing:-.028em;
+  color:var(--teal);
+  margin-bottom:40px;
+}
+.hero-title-em{
+  font-family:var(--italic);
+  font-style:italic;
+  font-weight:600;
+  color:var(--story);
+  letter-spacing:-.015em;
+  position:relative;
+}
+.hero-title-em::after{
+  content:'';
+  position:absolute;
+  left:6%; right:6%;
+  bottom:.12em;
+  height:.14em;
+  background:linear-gradient(90deg, transparent 0%, var(--story) 18%, var(--story-d) 50%, var(--story) 82%, transparent 100%);
+  opacity:.32;
+  border-radius:99px;
+  z-index:-1;
+}
+
+.hero-lead{
+  font-family:var(--italic);
+  font-style:italic;
+  font-size:clamp(22px,2.4vw,32px);
+  line-height:1.35;
+  color:var(--grey-d);
+  max-width:560px;
+  margin-bottom:48px;
+  font-weight:500;
+}
+.hero-lead-em{
+  font-style:italic;
+  color:var(--story-d);
+  font-weight:700;
+}
+
+.hero-meta{
+  display:flex;
+  gap:36px;
+  flex-wrap:wrap;
+  font-family:var(--mono);
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--grey-d);
+}
+.hero-meta-item{
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.hero-meta-dot{
+  width:10px;height:10px;
+  border-radius:50%;
+  flex-shrink:0;
+}
+.hero-meta-item:nth-child(1) .hero-meta-dot{background:var(--b1);box-shadow:0 0 0 4px var(--b1-l);}
+.hero-meta-item:nth-child(2) .hero-meta-dot{background:var(--b2);box-shadow:0 0 0 4px var(--b2-l);}
+.hero-meta-item:nth-child(3) .hero-meta-dot{background:var(--b3);box-shadow:0 0 0 4px var(--b3-l);}
+
+/* Guiding-questions stack on the right */
+.leitfragen{
+  position:relative;
+  padding-top:24px;
+}
+.leitfrage{
+  background:var(--cream);
+  border:1px solid var(--sand);
+  border-left:5px solid var(--gold);
+  border-radius:18px;
+  padding:30px 34px;
+  margin-bottom:-18px;
+  box-shadow:0 28px 56px -28px rgba(11,57,72,.22);
+  transition:transform .35s ease, box-shadow .35s ease;
+  position:relative;
+}
+.leitfrage:nth-child(1){
+  transform:rotate(-1.4deg) translateX(-12px);
+  z-index:3;
+  background:var(--b1-l);
+  border-left-color:var(--b1);
+}
+.leitfrage:nth-child(2){
+  transform:rotate(.6deg) translateX(8px);
+  z-index:2;
+  background:var(--b2-l);
+  border-left-color:var(--b2);
+}
+.leitfrage:nth-child(3){
+  transform:rotate(-.4deg) translateX(-4px);
+  z-index:1;
+  background:var(--b3-l);
+  border-left-color:var(--b3);
+}
+.leitfrage:hover{
+  transform:rotate(0) translateX(0) translateY(-4px);
+  z-index:4;
+  box-shadow:0 36px 72px -24px rgba(11,57,72,.32);
+}
+.leitfrage-num{
+  font-family:var(--mono);
+  font-size:11.5px;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  margin-bottom:14px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+.leitfrage:nth-child(1) .leitfrage-num{color:var(--b1-d);}
+.leitfrage:nth-child(2) .leitfrage-num{color:var(--b2-d);}
+.leitfrage:nth-child(3) .leitfrage-num{color:var(--b3-d);}
+.leitfrage-num-glyph{
+  width:26px;height:26px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border:1.5px solid currentColor;
+  border-radius:50%;
+  font-size:13px;
+  font-weight:700;
+}
+.leitfrage-text{
+  font-family:var(--italic);
+  font-style:italic;
+  font-size:25px;
+  line-height:1.3;
+  color:var(--teal);
+  font-weight:600;
+  letter-spacing:-.005em;
+}
+.leitfrage-key{
+  font-family:var(--mono);
+  font-size:11.5px;
+  font-weight:600;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  margin-top:14px;
+  display:inline-block;
+  padding:5px 12px;
+  border-radius:4px;
+  background:rgba(255,252,242,.5);
+}
+.leitfrage:nth-child(1) .leitfrage-key{color:var(--b1-d);}
+.leitfrage:nth-child(2) .leitfrage-key{color:var(--b2-d);}
+.leitfrage:nth-child(3) .leitfrage-key{color:var(--b3-d);}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* PROGRESS RAIL                                                */
+/* ═══════════════════════════════════════════════════════════ */
+.rail{
+  background:var(--cream);
+  border-top:1px solid var(--sand);
+  border-bottom:1px solid var(--sand);
+  padding:32px var(--pad-page);
+  position:relative;
+  z-index:2;
+}
+.rail-inner{
+  max-width:var(--max-w);
+  margin:0 auto;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:32px;
+  flex-wrap:wrap;
+}
+.rail-stat{
+  display:flex;
+  align-items:baseline;
+  gap:18px;
+}
+.rail-num{
+  font-family:var(--serif);
+  font-size:48px;
+  line-height:1;
+  color:var(--teal);
+  letter-spacing:-.02em;
+}
+.rail-num-frac{
+  font-family:var(--mono);
+  font-size:14px;
+  color:var(--grey-m);
+  letter-spacing:.06em;
+}
+.rail-label{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--gold-d);
+  margin-top:4px;
+}
+.rail-progress{
+  flex:1;
+  min-width:280px;
+  height:6px;
+  background:var(--sand);
+  border-radius:3px;
+  overflow:hidden;
+  position:relative;
+}
+.rail-progress-fill{
+  position:absolute;
+  inset:0 auto 0 0;
+  background:linear-gradient(90deg,var(--b1) 0%,var(--b2) 50%,var(--b3) 100%);
+  border-radius:3px;
+  width:57%; /* 4 of 7 */
+  transition:width .8s cubic-bezier(.6,.2,.2,1);
+}
+.rail-progress-markers{
+  position:absolute;
+  inset:-6px 0;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  pointer-events:none;
+}
+.rail-marker{
+  width:11px;height:11px;
+  background:var(--flora);
+  border:2px solid var(--grey-l);
+  border-radius:50%;
+  cursor:pointer;
+  transition:transform .2s ease, border-color .2s ease, box-shadow .2s ease;
+  pointer-events:auto;
+}
+.rail-marker:hover{
+  transform:scale(1.4);
+  border-color:var(--teal);
+  box-shadow:0 0 0 4px rgba(11,57,72,.12);
+}
+.rail-marker.filled{
+  background:var(--b1);
+  border-color:var(--b1-d);
+}
+.rail-marker.filled:hover{
+  box-shadow:0 0 0 4px rgba(220,38,38,.18);
+}
+.rail-marker.filled:nth-child(3){background:var(--b2);border-color:var(--b2-d);}
+.rail-marker.filled:nth-child(4){background:var(--b2);border-color:var(--b2-d);}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* TERRAIN — main area with stations                            */
+/* ═══════════════════════════════════════════════════════════ */
+.terrain{
+  position:relative;
+  padding:clamp(100px,14vh,200px) var(--pad-page) clamp(80px,12vh,160px);
+  background:var(--flora);
+  overflow:hidden;
+}
+.terrain-inner{
+  max-width:var(--max-w);
+  margin:0 auto;
+  position:relative;
+}
+
+/* Central vertical path line — THE red thread */
+.path-spine{
+  position:absolute;
+  left:50%;
+  top:0;
+  bottom:0;
+  width:1px;
+  z-index:1;
+  pointer-events:none;
+}
+.path-spine svg{
+  position:absolute;
+  inset:0;
+  width:200px;
+  height:100%;
+  transform:translateX(-100px);
+  overflow:visible;
+}
+.path-line{
+  fill:none;
+  stroke:var(--story);
+  stroke-width:4;
+  stroke-linecap:round;
+  opacity:.92;
+  filter:drop-shadow(0 0 12px rgba(220,38,38,.35)) drop-shadow(0 4px 8px rgba(153,27,27,.25));
+}
+.path-line-glow{
+  fill:none;
+  stroke:var(--story);
+  stroke-width:14;
+  stroke-linecap:round;
+  opacity:.12;
+}
+@media (max-width:900px){
+  .path-spine{left:32px;}
+  .path-spine svg{transform:translateX(-100px);}
+}
+
+/* Station entry */
+.station{
+  position:relative;
+  z-index:2;
+  padding:clamp(60px,8vh,100px) 0;
+  display:grid;
+  grid-template-columns:1fr 160px 1fr;
+  align-items:center;
+  gap:0;
+  opacity:0;
+  transform:translateY(40px);
+  transition:opacity .8s cubic-bezier(.4,0,.2,1), transform .8s cubic-bezier(.4,0,.2,1);
+}
+.station.in-view{opacity:1;transform:translateY(0);}
+
+/* Spacer column with pin */
+.station-pin-col{
+  position:relative;
+  align-self:center;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  height:140px;
+}
+
+/* Pin marker — geodesy style */
+.pin{
+  width:128px;height:128px;
+  position:relative;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+}
+.pin:hover{transform:scale(1.05);}
+.pin.current{
+  width:148px;height:148px;
+}
+.pin-svg{
+  width:100%;height:100%;
+  display:block;
+  filter:drop-shadow(0 22px 36px rgba(11,57,72,.22));
+}
+.pin.current .pin-svg{
+  filter:drop-shadow(0 26px 44px rgba(220,38,38,.35)) drop-shadow(0 8px 16px rgba(220,38,38,.25));
+}
+.pin-num{
+  position:absolute;
+  font-family:var(--mono);
+  font-size:19px;
+  font-weight:700;
+  color:var(--flora);
+  letter-spacing:.04em;
+  z-index:2;
+}
+.pin.current .pin-num{font-size:22px;}
+.pin.empty .pin-num{color:var(--story-d);}
+
+/* Cards left/right */
+.station-card{
+  background:var(--cream);
+  border:1px solid var(--sand);
+  border-radius:24px;
+  padding:clamp(36px,4.5vw,64px) clamp(32px,4vw,56px);
+  box-shadow:0 32px 64px -36px rgba(11,57,72,.16);
+  position:relative;
+  transition:transform .35s ease, box-shadow .35s ease;
+}
+.station-card:hover{
+  transform:translateY(-3px);
+  box-shadow:0 40px 72px -32px rgba(11,57,72,.22);
+}
+/* Card visibility via class, not nth-child:
+   .station-card marks the filled card, the rest are empty grid spacers */
+.station-card.station-card-left{justify-self:end;max-width:560px;width:100%;}
+.station-card.station-card-right{justify-self:start;max-width:560px;width:100%;}
+
+@media (max-width:900px){
+  .station{
+    grid-template-columns:80px 1fr;
+    gap:24px;
+  }
+  .station-pin-col{height:80px;}
+  .pin{width:64px;height:64px;}
+  .pin.current{width:76px;height:76px;}
+  .pin-num{font-size:12px;}
+  .pin.current .pin-num{font-size:14px;}
+  .station-card-left,
+  .station-card-right{
+    grid-column:2;
+    grid-row:1;
+    max-width:none;
+    justify-self:stretch;
+  }
+  /* On mobile, the filled card (.station-card) slides into the card column;
+     the empty spacers are hidden */
+  .station-card-left:not(.station-card),
+  .station-card-right:not(.station-card){display:none;}
+  .station-pin-col{grid-column:1;}
+
+  /* Mobile: compress the answer column */
+  .answer{padding-left:14px;}
+  .answer-text{padding-left:0;}
+  .answer-text[contenteditable="true"]{margin-left:0;}
+  .answer-text.empty{
+    margin-left:0;
+    padding:14px 16px;
+  }
+  /* Hide edit hints on mobile — not enough space */
+  .card-title::after,
+  .card-quote::after,
+  .editable-field::after,
+  .answer-text::after,
+  .placeholder::after{display:none;}
+}
+
+/* Card composition */
+.card-eyebrow{
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--gold-d);
+  margin-bottom:20px;
+  display:flex;
+  align-items:center;
+  gap:12px;
+}
+.station.b1 .card-eyebrow{color:var(--b1-d);}
+.station.b2 .card-eyebrow{color:var(--b2-d);}
+.station.b3 .card-eyebrow{color:var(--b3-d);}
+.station.current .card-eyebrow{color:var(--story-d);}
+.card-eyebrow-sep{
+  color:var(--grey-l);
+  font-weight:300;
+}
+.card-title{
+  font-family:var(--serif);
+  font-size:clamp(40px,4.4vw,68px);
+  line-height:.98;
+  letter-spacing:-.022em;
+  color:var(--teal);
+  margin-bottom:20px;
+}
+.card-quote{
+  font-family:var(--italic);
+  font-style:italic;
+  font-size:clamp(19px,1.7vw,24px);
+  line-height:1.4;
+  color:var(--grey-d);
+  padding:20px 0 30px;
+  border-bottom:1px solid var(--sand);
+  margin-bottom:32px;
+  font-weight:500;
+}
+.card-quote::before{
+  content:'';
+  display:block;
+  width:48px;
+  height:3px;
+  background:var(--story);
+  margin-bottom:18px;
+  border-radius:2px;
+}
+
+/* Answer blocks */
+.answers{
+  display:flex;
+  flex-direction:column;
+  gap:24px;
+}
+.answer{
+  position:relative;
+  padding:20px 0 0 20px;
+  border-left:3px solid transparent;
+  transition:border-color .25s ease;
+}
+.answer-head{
+  display:flex;
+  align-items:center;
+  gap:14px;
+  margin-bottom:12px;
+}
+.answer-glyph{
+  width:32px;height:32px;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:8px;
+}
+.answer-label{
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+}
+.answer-text{
+  font-size:16.5px;
+  line-height:1.62;
+  color:var(--grey-d);
+  padding-left:46px;
+}
+.answer-text[contenteditable="true"]{
+  background:var(--flora);
+  border-radius:8px;
+  padding:14px 18px;
+  margin-left:46px;
+  padding-left:18px;
+  outline:none;
+  border:1px solid var(--teal-m);
+  box-shadow:0 0 0 4px rgba(93,167,178,.1);
+}
+.answer-text.empty{
+  color:var(--story-d);
+  font-style:italic;
+  font-weight:500;
+  cursor:text;
+  display:block;
+  background:var(--story-l);
+  border:2px dashed var(--story);
+  border-radius:10px;
+  padding:16px 20px;
+  margin-left:46px;
+  opacity:1;
+  box-shadow:0 4px 12px -4px rgba(220,38,38,.15), inset 0 0 0 1px rgba(220,38,38,.06);
+  transition:background .2s ease, transform .2s ease, box-shadow .2s ease;
+  position:relative;
+}
+.answer-text.empty::after{
+  content:'✎ click to fill in';
+  position:absolute;
+  top:-24px;
+  right:0;
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--flora);
+  background:var(--story);
+  padding:4px 10px;
+  border-radius:4px;
+  opacity:0;
+  transform:translateY(4px);
+  transition:opacity .2s ease, transform .2s ease;
+  pointer-events:none;
+  white-space:nowrap;
+  z-index:10;
+  box-shadow:0 4px 12px -4px rgba(220,38,38,.4);
+}
+.answer-text.empty:hover::after{
+  opacity:1;
+  transform:translateY(0);
+}
+.answer-text.empty:hover,
+.answer-text.empty:active{
+  background:#FECACA;
+  transform:translateX(2px);
+  box-shadow:0 8px 20px -4px rgba(220,38,38,.25), inset 0 0 0 1px rgba(220,38,38,.12);
+}
+
+/* B1 · Why — drive */
+.answer.warum{border-left-color:var(--b1);}
+.answer.warum .answer-glyph{background:var(--b1-l);color:var(--b1-d);}
+.answer.warum .answer-label{color:var(--b1-d);}
+
+/* B2 · What — substance */
+.answer.was{border-left-color:var(--b2);}
+.answer.was .answer-glyph{background:var(--b2-l);color:var(--b2-d);}
+.answer.was .answer-label{color:var(--b2-d);}
+
+/* B3 · Next — connection/growth */
+.answer.wohin{border-left-color:var(--b3);}
+.answer.wohin .answer-glyph{background:var(--b3-l);color:var(--b3-d);}
+.answer.wohin .answer-label{color:var(--b3-d);}
+
+/* Inline-editable fields (e.g. period, company in the eyebrow) — subtler */
+.editable-field{
+  cursor:text;
+  display:inline-block;
+  padding:2px 6px;
+  margin:-2px -6px;
+  border-radius:4px;
+  border-bottom:1px dotted transparent;
+  position:relative;
+  transition:background .2s ease, border-color .2s ease;
+}
+.editable-field:hover{
+  background:rgba(11,57,72,.07);
+  border-bottom-color:rgba(11,57,72,.4);
+}
+.editable-field[contenteditable="true"]{
+  background:var(--flora) !important;
+  outline:none;
+  box-shadow:0 0 0 2px var(--teal-m), 0 0 0 5px rgba(93,167,178,.15) !important;
+  caret-color:var(--story);
+  border-bottom-color:transparent;
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* EDIT AFFORDANCE — make filled fields recognizable as editable */
+/* ═══════════════════════════════════════════════════════════ */
+.card-title,
+.card-quote,
+.editable-field,
+.answer-text:not(.empty){
+  cursor:text;
+  border-radius:6px;
+  padding:4px 8px;
+  margin:-4px -8px;
+  position:relative;
+  transition:background .2s ease, box-shadow .2s ease;
+}
+
+/* Editable field (period, company) slightly more compact — smaller mono text */
+.editable-field{
+  padding:2px 6px;
+  margin:-2px -6px;
+  border-radius:4px;
+}
+
+/* Floating hover hint — tooltip top right */
+.card-title::after,
+.card-quote::after,
+.editable-field::after,
+.answer-text:not(.empty)::after{
+  content:'✎ click to edit';
+  position:absolute;
+  top:-30px;
+  right:0;
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--flora);
+  background:var(--teal);
+  padding:5px 11px;
+  border-radius:4px;
+  opacity:0;
+  transform:translateY(6px);
+  transition:opacity .2s ease, transform .2s ease;
+  pointer-events:none;
+  white-space:nowrap;
+  z-index:10;
+  box-shadow:0 6px 18px -6px rgba(11,57,72,.4);
+}
+.card-title::after{top:-26px;}
+.editable-field::after{top:-22px;font-size:9px;padding:3px 8px;letter-spacing:.12em;}
+.answer-text:not(.empty)::after{top:-24px;font-size:9.5px;padding:4px 9px;}
+
+.card-title:hover,
+.card-quote:hover,
+.editable-field:hover,
+.answer-text:not(.empty):hover{
+  background:rgba(11,57,72,.05);
+  box-shadow:inset 0 0 0 1.5px rgba(11,57,72,.18);
+}
+.card-title:hover::after,
+.card-quote:hover::after,
+.editable-field:hover::after,
+.answer-text:not(.empty):hover::after{
+  opacity:1;
+  transform:translateY(0);
+}
+
+/* Edit-State — Tippmodus, deutlich sichtbar */
+.card-title[contenteditable="true"],
+.card-quote[contenteditable="true"],
+.editable-field[contenteditable="true"],
+.answer-text[contenteditable="true"]{
+  background:var(--flora) !important;
+  outline:none;
+  box-shadow:0 0 0 3px var(--teal-m), 0 0 0 8px rgba(93,167,178,.18) !important;
+  cursor:text;
+  caret-color:var(--story);
+}
+.card-title[contenteditable="true"]::after,
+.card-quote[contenteditable="true"]::after,
+.editable-field[contenteditable="true"]::after,
+.answer-text[contenteditable="true"]::after{
+  content:'✓ editing · click outside to close';
+  opacity:1;
+  transform:translateY(0);
+  background:var(--teal);
+  color:var(--flora);
+}
+.editable-field[contenteditable="true"]::after{
+  content:'✓ editing';
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* UNIVERSAL PLACEHOLDER — for editable fields in new stations */
+/* ═══════════════════════════════════════════════════════════ */
+.placeholder,
+.answer-text.empty,
+.answer-text[contenteditable="true"]{
+  position:relative;
+  z-index:3;
+  pointer-events:auto !important;
+}
+.placeholder{
+  color:var(--story-d);
+  font-style:italic;
+  cursor:text;
+  background:var(--story-l);
+  border:2px dashed var(--story);
+  border-radius:8px;
+  padding:6px 14px;
+  display:inline-block;
+  opacity:1;
+  transition:background .2s ease, transform .2s ease, box-shadow .2s ease;
+  box-shadow:inset 0 0 0 1px rgba(220,38,38,.06);
+  -webkit-tap-highlight-color:rgba(220,38,38,.2);
+  position:relative;
+}
+.placeholder::after{
+  content:'✎ click to fill in';
+  position:absolute;
+  top:-26px;
+  left:0;
+  font-family:var(--mono);
+  font-size:10px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--flora);
+  background:var(--story);
+  padding:4px 10px;
+  border-radius:4px;
+  opacity:0;
+  transform:translateY(4px);
+  transition:opacity .2s ease, transform .2s ease;
+  pointer-events:none;
+  white-space:nowrap;
+  z-index:10;
+  box-shadow:0 4px 12px -4px rgba(220,38,38,.4);
+}
+.placeholder:hover::after{
+  opacity:1;
+  transform:translateY(0);
+}
+.placeholder:hover,
+.placeholder:active{
+  background:#FECACA;
+  transform:translateY(-1px);
+  box-shadow:0 6px 14px -4px rgba(220,38,38,.22), inset 0 0 0 1px rgba(220,38,38,.12);
+}
+.placeholder[contenteditable="true"]{
+  background:var(--flora);
+  border:2px solid var(--teal-m);
+  border-style:solid;
+  color:var(--text);
+  font-style:normal;
+  outline:none;
+  box-shadow:0 0 0 4px rgba(93,167,178,.1);
+  transform:none;
+}
+
+/* Variant: card title as placeholder — stays large, no huge padding */
+.card-title.placeholder{
+  padding:10px 22px;
+  font-style:italic;
+  font-family:var(--italic);
+  font-weight:500;
+  font-size:clamp(36px,4vw,56px);
+}
+
+/* Variant: card quote as placeholder */
+.card-quote.placeholder{
+  padding:14px 20px;
+  display:block;
+  width:fit-content;
+  max-width:100%;
+}
+
+/* Empty station (for "+ Add next station") */
+.station-empty .station-card{
+  background:rgba(254,226,226,.35);
+  border:2px dashed var(--story);
+  box-shadow:none;
+  text-align:center;
+  padding:52px 48px;
+  cursor:pointer;
+  transition:border-color .25s ease, background .25s ease, transform .25s ease;
+}
+.station-empty .station-card:hover{
+  border-color:var(--story-d);
+  background:var(--story-l);
+  transform:translateY(-2px);
+  box-shadow:0 20px 40px -20px rgba(220,38,38,.3);
+}
+.empty-title{
+  font-family:var(--serif);
+  font-size:30px;
+  color:var(--story-d);
+  margin-bottom:10px;
+  letter-spacing:-.015em;
+}
+.empty-text{
+  font-size:15.5px;
+  color:var(--grey-d);
+  max-width:340px;
+  margin:0 auto;
+  line-height:1.55;
+}
+
+/* Add-station pulse for empty pin */
+.pin.empty .pin-svg circle.outer{
+  stroke-dasharray:4 4;
+  animation:dash-rotate 24s linear infinite;
+}
+@keyframes dash-rotate{
+  to{stroke-dashoffset:-32;}
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* ADD BUTTON                                                   */
+/* ═══════════════════════════════════════════════════════════ */
+.add-cta{
+  position:relative;
+  z-index:2;
+  padding:clamp(40px,6vh,80px) 0;
+  display:flex;
+  justify-content:center;
+}
+.add-btn{
+  display:inline-flex;
+  align-items:center;
+  gap:18px;
+  padding:24px 48px;
+  background:var(--story);
+  color:var(--flora);
+  border-radius:100px;
+  font-family:var(--sans);
+  font-size:17.5px;
+  font-weight:600;
+  letter-spacing:-.005em;
+  transition:transform .25s ease, background .25s ease, box-shadow .25s ease;
+  box-shadow:0 24px 48px -16px rgba(220,38,38,.45);
+}
+.add-btn:hover{
+  background:var(--story-d);
+  transform:translateY(-3px);
+  box-shadow:0 32px 64px -16px rgba(220,38,38,.55);
+}
+.add-btn-icon{
+  width:24px;height:24px;
+  border:1.5px solid currentColor;
+  border-radius:50%;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-size:20px;
+  font-weight:300;
+  line-height:1;
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* GENERATOR (Story-CTA am Ende)                                */
+/* ═══════════════════════════════════════════════════════════ */
+.generator{
+  position:relative;
+  padding:clamp(80px,12vh,180px) var(--pad-page);
+  background:var(--teal);
+  color:var(--flora);
+  overflow:hidden;
+}
+.generator-inner{
+  position:relative;
+  z-index:2;
+  max-width:var(--max-w);
+  margin:0 auto;
+  display:grid;
+  grid-template-columns:1.1fr .9fr;
+  gap:clamp(40px,6vw,100px);
+  align-items:center;
+}
+@media (max-width:900px){
+  .generator-inner{grid-template-columns:1fr;}
+}
+
+.generator-eyebrow{
+  font-family:var(--mono);
+  font-size:14px;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--story-l);
+  margin-bottom:32px;
+  display:inline-flex;
+  align-items:center;
+  gap:14px;
+}
+.generator-eyebrow::before{
+  content:'';
+  display:block;
+  width:56px;
+  height:2px;
+  background:var(--story);
+}
+.generator-title{
+  font-family:var(--serif);
+  font-size:clamp(48px,7vw,96px);
+  line-height:.94;
+  letter-spacing:-.028em;
+  margin-bottom:32px;
+}
+.generator-title-em{
+  font-family:var(--italic);
+  font-style:italic;
+  color:var(--story);
+  font-weight:600;
+}
+.generator-text{
+  font-size:18px;
+  line-height:1.65;
+  color:rgba(255,252,242,.85);
+  max-width:520px;
+  margin-bottom:0;
+}
+
+.generator-options{
+  display:flex;
+  flex-direction:column;
+  gap:16px;
+}
+.gen-option{
+  background:rgba(255,252,242,.06);
+  border:1px solid rgba(255,252,242,.18);
+  border-left:4px solid transparent;
+  border-radius:16px;
+  padding:26px 30px;
+  display:grid;
+  grid-template-columns:auto 1fr auto;
+  gap:22px;
+  align-items:center;
+  text-align:left;
+  cursor:pointer;
+  transition:background .25s ease, border-color .25s ease, transform .2s ease;
+  color:var(--flora);
+}
+.gen-option:hover{
+  background:rgba(255,252,242,.12);
+  border-color:rgba(255,252,242,.36);
+  transform:translateX(4px);
+}
+.gen-option:nth-child(1){border-left-color:var(--b1);}
+.gen-option:nth-child(2){border-left-color:var(--b2);}
+.gen-option:nth-child(3){border-left-color:var(--b3);}
+
+.gen-option-len{
+  font-family:var(--mono);
+  font-size:13px;
+  font-weight:700;
+  letter-spacing:.08em;
+  min-width:68px;
+}
+.gen-option:nth-child(1) .gen-option-len{color:var(--b1-l);}
+.gen-option:nth-child(2) .gen-option-len{color:var(--b2-l);}
+.gen-option:nth-child(3) .gen-option-len{color:var(--b3-l);}
+
+.gen-option-body{
+  display:flex;
+  flex-direction:column;
+  gap:4px;
+}
+.gen-option-name{
+  font-family:var(--serif);
+  font-size:24px;
+  line-height:1.15;
+  letter-spacing:-.012em;
+}
+.gen-option-desc{
+  font-size:14.5px;
+  color:rgba(255,252,242,.78);
+}
+.gen-option-arrow{
+  font-size:26px;
+  color:var(--story-l);
+  transition:transform .2s ease, color .2s ease;
+}
+.gen-option:hover .gen-option-arrow{transform:translateX(6px);color:var(--story);}
+
+.gen-disabled-note{
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:rgba(255,252,242,.5);
+  margin-top:32px;
+  padding-top:24px;
+  border-top:1px solid rgba(255,252,242,.18);
+  display:flex;
+  align-items:center;
+  gap:10px;
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* FOOTER-LEISTE (Hub-Hinweis)                                  */
+/* ═══════════════════════════════════════════════════════════ */
+.foot{
+  background:var(--flora);
+  border-top:1px solid var(--sand);
+  padding:32px var(--pad-page);
+  text-align:center;
+  font-family:var(--mono);
+  font-size:12px;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--grey-m);
+}
+.foot-bar{
+  width:56px;height:3px;
+  background:var(--story);
+  margin:0 auto 18px;
+  border-radius:2px;
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* CONCEPT-BADGE (oben rechts)                                  */
+/* ═══════════════════════════════════════════════════════════ */
+.concept-badge{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:50;
+  background:var(--teal);
+  color:var(--flora);
+  padding:10px 18px;
+  border-radius:100px;
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:500;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  box-shadow:0 12px 24px -8px rgba(11,57,72,.4);
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+}
+.concept-badge-dot{
+  width:8px;height:8px;
+  background:var(--story);
+  border-radius:50%;
+  box-shadow:0 0 0 3px rgba(220,38,38,.3);
+  animation:badge-pulse 2.4s ease-in-out infinite;
+}
+@keyframes badge-pulse{
+  0%,100%{opacity:.4;}
+  50%{opacity:1;}
+}
+
+
+/* ═══════════════════════════════════════════════════════════ */
+/* BRAND-BAR — Changemaker-Logo + Programm-Identifikation       */
+/* ═══════════════════════════════════════════════════════════ */
+.brand-bar{
+  position:relative;
+  z-index:5;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:clamp(20px,4vw,48px);
+  padding:clamp(20px,2.6vh,32px) var(--pad-page) clamp(12px,1.6vh,20px);
+  background:var(--cream);
+  border-bottom:1px solid var(--sand);
+}
+.brand-logo{
+  height:clamp(48px,5.6vw,72px);
+  width:auto;
+  display:block;
+  flex-shrink:0;
+}
+.brand-program{
+  text-align:right;
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:4px;
+}
+.brand-program-label{
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--gold-d);
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+}
+.brand-program-label::before{
+  content:'';
+  width:24px;
+  height:1.5px;
+  background:var(--gold);
+}
+.brand-program-name{
+  font-family:var(--serif);
+  font-size:clamp(20px,2vw,26px);
+  letter-spacing:-.015em;
+  color:var(--teal);
+  line-height:1;
+}
+.brand-program-module{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--grey-m);
+  margin-top:2px;
+}
+@media (max-width:720px){
+  .brand-bar{
+    flex-direction:column;
+    align-items:flex-start;
+    gap:14px;
+    padding-bottom:20px;
+  }
+  .brand-program{
+    text-align:left;
+    align-items:flex-start;
+  }
+  .brand-program-label::before{display:none;}
+}
+
+/* Footer brand */
+.foot-brand{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  margin-bottom:14px;
+}
+.foot-logo{
+  height:32px;
+  width:auto;
+  opacity:.7;
+}
+.foot-meta{
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--grey-m);
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* TOOLBAR — JSON save/load, sticky under the branding          */
+/* ═══════════════════════════════════════════════════════════ */
+.toolbar{
+  position:sticky;
+  top:0;
+  z-index:40;
+  display:flex;
+  gap:6px;
+  align-items:center;
+  padding:10px clamp(16px,3vw,32px);
+  background:rgba(255,252,242,.92);
+  backdrop-filter:saturate(180%) blur(10px);
+  -webkit-backdrop-filter:saturate(180%) blur(10px);
+  border-bottom:1px solid var(--sand);
+}
+.toolbar-btn{
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  color:var(--teal);
+  padding:8px 14px;
+  border-radius:100px;
+  background:transparent;
+  border:none;
+  cursor:pointer;
+  transition:background .2s ease, color .2s ease;
+  display:inline-flex;
+  align-items:center;
+  gap:8px;
+}
+.toolbar-btn:hover{background:var(--sand);}
+.toolbar-btn svg{width:13px;height:13px;flex-shrink:0;}
+.toolbar-status{
+  font-family:var(--mono);
+  font-size:10px;
+  color:var(--grey-m);
+  padding:0 4px 0 12px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  margin-left:auto;
+}
+.toolbar-status::before{
+  content:'';
+  width:7px;height:7px;
+  border-radius:50%;
+  background:var(--moss);
+  box-shadow:0 0 0 3px var(--moss-l);
+}
+.toolbar-status.is-saving::before{background:var(--gold);box-shadow:0 0 0 3px var(--gold-l);}
+@media (max-width:560px){
+  .toolbar{flex-wrap:wrap;gap:4px;}
+  .toolbar-status{padding-left:6px;font-size:9.5px;}
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* PITCH WORKSHOP — three lengths × practice iterations         */
+/* ═══════════════════════════════════════════════════════════ */
+.pitch{
+  position:relative;
+  padding:clamp(80px,12vh,160px) var(--pad-page);
+  background:
+    radial-gradient(circle at 85% 15%, rgba(220,38,38,.05) 0%, transparent 45%),
+    radial-gradient(circle at 15% 85%, rgba(77,124,15,.06) 0%, transparent 50%),
+    linear-gradient(180deg, var(--flora) 0%, var(--cream) 100%);
+  overflow:hidden;
+  border-top:1px solid var(--sand);
+}
+.pitch-inner{
+  max-width:var(--max-w);
+  margin:0 auto;
+  position:relative;
+}
+.pitch-header{
+  text-align:center;
+  margin-bottom:clamp(48px,8vh,96px);
+  max-width:780px;
+  margin-left:auto;
+  margin-right:auto;
+}
+.pitch-eyebrow{
+  font-family:var(--mono);
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  color:var(--story-d);
+  margin-bottom:28px;
+  display:inline-flex;
+  align-items:center;
+  gap:14px;
+  justify-content:center;
+}
+.pitch-eyebrow::before,
+.pitch-eyebrow::after{
+  content:'';
+  display:block;
+  width:42px;
+  height:2px;
+  background:var(--story);
+}
+.pitch-title{
+  font-family:var(--serif);
+  font-size:clamp(48px,7vw,88px);
+  line-height:.96;
+  letter-spacing:-.022em;
+  color:var(--teal);
+  margin-bottom:26px;
+}
+.pitch-title-em{
+  font-family:var(--italic);
+  font-style:italic;
+  font-weight:600;
+  color:var(--story);
+}
+.pitch-lead{
+  font-family:var(--italic);
+  font-style:italic;
+  font-size:clamp(19px,1.8vw,24px);
+  line-height:1.42;
+  color:var(--grey-d);
+  font-weight:600;
+}
+
+/* Three pitch cards side by side */
+.pitch-grid{
+  display:grid;
+  grid-template-columns:repeat(3,1fr);
+  gap:clamp(20px,2.5vw,32px);
+}
+@media (max-width:1080px){.pitch-grid{grid-template-columns:1fr;max-width:720px;margin:0 auto;}}
+
+.pitch-card{
+  background:var(--cream);
+  border:1px solid var(--sand);
+  border-radius:24px;
+  padding:clamp(28px,3vw,40px);
+  display:flex;
+  flex-direction:column;
+  gap:20px;
+  position:relative;
+  overflow:hidden;
+  transition:box-shadow .3s ease, transform .3s ease;
+}
+.pitch-card:hover{
+  box-shadow:0 28px 60px -28px rgba(11,57,72,.22);
+  transform:translateY(-2px);
+}
+.pitch-card.b1{border-top:4px solid var(--b1);}
+.pitch-card.b2{border-top:4px solid var(--b2);}
+.pitch-card.b3{border-top:4px solid var(--b3);}
+
+/* Visual hierarchy: 3-min is the final form — slightly elevated */
+.pitch-card.is-primary{
+  background:linear-gradient(180deg, var(--cream) 0%, #fffaf0 100%);
+  box-shadow:0 16px 38px -20px rgba(159,130,82,.32);
+  border-top-width:5px;
+}
+.pitch-card.is-primary:hover{
+  box-shadow:0 36px 70px -28px rgba(159,130,82,.42);
+}
+/* 1-min is bonus — more subtle */
+.pitch-card.is-optional{
+  background:var(--flora);
+  opacity:.94;
+}
+.pitch-card.is-optional:hover{opacity:1;}
+
+/* Card badge top right */
+.pitch-card-badge{
+  position:absolute;
+  top:18px;
+  right:18px;
+  background:var(--gold-d);
+  color:var(--flora);
+  font-family:var(--mono);
+  font-size:9.5px;
+  font-weight:700;
+  letter-spacing:.18em;
+  text-transform:uppercase;
+  padding:5px 11px;
+  border-radius:100px;
+  z-index:2;
+}
+.pitch-card-badge.is-soft{
+  background:transparent;
+  color:var(--grey-m);
+  border:1px solid var(--sand);
+  font-weight:600;
+}
+
+.pitch-card-head{
+  display:flex;
+  align-items:flex-end;
+  justify-content:space-between;
+  gap:16px;
+}
+.pitch-len{
+  font-family:var(--serif);
+  font-size:clamp(56px,5.5vw,76px);
+  line-height:1;
+  letter-spacing:-.03em;
+  color:var(--teal);
+}
+.pitch-card.b1 .pitch-len{color:var(--b1-d);}
+.pitch-card.b2 .pitch-len{color:var(--b2-d);}
+.pitch-card.b3 .pitch-len{color:var(--b3-d);}
+.pitch-len-unit{
+  font-family:var(--mono);
+  font-size:15px;
+  font-weight:600;
+  letter-spacing:.12em;
+  color:var(--gold-d);
+  text-transform:uppercase;
+  margin-left:4px;
+}
+.pitch-name{
+  font-family:var(--mono);
+  font-size:11.5px;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--grey-d);
+  margin-top:4px;
+}
+.pitch-purpose{
+  font-family:var(--italic);
+  font-style:italic;
+  font-size:16.5px;
+  line-height:1.45;
+  color:var(--text);
+  border-top:1px solid var(--sand);
+  padding-top:18px;
+  margin-bottom:0;
+  font-weight:600;
+}
+
+/* Pitch text, editable */
+.pitch-text{
+  background:var(--flora);
+  border:1px solid var(--sand);
+  border-radius:14px;
+  padding:24px 26px;
+  font-family:var(--sans);
+  font-size:15.5px;
+  font-weight:500;
+  line-height:1.65;
+  color:var(--text);
+  white-space:pre-line;
+  min-height:240px;
+  max-height:380px;
+  overflow-y:auto;
+  cursor:text;
+  outline:none;
+  transition:box-shadow .2s ease, border-color .2s ease;
+}
+.pitch-text:hover{border-color:var(--gold);}
+.pitch-text:focus{
+  box-shadow:0 0 0 3px var(--teal-m), 0 0 0 7px rgba(93,167,178,.16);
+  border-color:transparent;
+}
+.pitch-text:empty::before{
+  content:'Still empty. Click in and start typing — the text saves automatically.';
+  font-style:italic;
+  font-weight:500;
+  color:var(--grey-m);
+}
+.pitch-text strong{font-weight:700;color:var(--teal);}
+
+/* Action bar per pitch */
+.pitch-actions{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.pitch-copy-btn{
+  flex:1;
+  min-width:130px;
+  padding:14px 20px;
+  background:var(--teal);
+  color:var(--flora);
+  border-radius:12px;
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:700;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  cursor:pointer;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  transition:background .2s ease, transform .2s ease;
+  border:none;
+}
+.pitch-copy-btn:hover{
+  background:var(--teal-d);
+  transform:translateY(-2px);
+}
+.pitch-copy-btn.copied{
+  background:var(--moss);
+}
+
+/* Recording prompt */
+.pitch-prompt{
+  background:var(--story-l);
+  border:1.5px solid var(--story);
+  border-radius:14px;
+  padding:18px 20px;
+  display:flex;
+  align-items:flex-start;
+  gap:14px;
+}
+.pitch-prompt-icon{
+  width:36px;
+  height:36px;
+  background:var(--story);
+  color:var(--flora);
+  border-radius:50%;
+  flex-shrink:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.pitch-prompt-icon svg{width:17px;height:17px;}
+.pitch-prompt-text{
+  font-size:14.5px;
+  line-height:1.5;
+  color:var(--story-d);
+  font-weight:600;
+}
+.pitch-prompt-text strong{
+  font-weight:700;
+  display:block;
+  margin-bottom:5px;
+  font-family:var(--mono);
+  font-size:11px;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+}
+
+/* Iterations tracker */
+.iterations{
+  border-top:1px solid var(--sand);
+  padding-top:20px;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+.iterations-head{
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:700;
+  letter-spacing:.16em;
+  text-transform:uppercase;
+  color:var(--gold-d);
+  margin-bottom:4px;
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+}
+.iter-count{
+  background:var(--gold-l);
+  color:var(--gold-d);
+  padding:3px 10px;
+  border-radius:100px;
+  font-size:10px;
+  font-weight:700;
+}
+.iter-count.is-complete{
+  background:var(--moss-l);
+  color:var(--moss-d);
+}
+.iter-list{
+  display:flex;
+  flex-direction:column;
+  gap:8px;
+}
+.iter-row{
+  display:grid;
+  grid-template-columns:34px 1fr auto;
+  gap:12px;
+  align-items:center;
+  padding:11px 14px 11px 11px;
+  background:var(--flora);
+  border:1px solid var(--sand);
+  border-radius:10px;
+  transition:border-color .2s ease, background .2s ease;
+}
+.iter-row.is-done{
+  background:var(--moss-l);
+  border-color:var(--moss);
+}
+.iter-row-num{
+  width:32px;height:32px;
+  border-radius:50%;
+  background:var(--cream);
+  border:1.5px solid var(--gold);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:700;
+  color:var(--gold-d);
+  flex-shrink:0;
+}
+.iter-row.is-done .iter-row-num{
+  background:var(--moss);
+  border-color:var(--moss-d);
+  color:var(--flora);
+}
+.iter-body{
+  display:flex;
+  align-items:center;
+  gap:8px;
+  flex-wrap:wrap;
+  min-width:0;
+}
+.iter-date-label{
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  color:var(--grey-m);
+}
+.iter-row.is-done .iter-date-label{color:var(--moss-d);}
+.iter-date{
+  font-family:var(--mono);
+  font-size:13px;
+  color:var(--text);
+  padding:5px 9px;
+  border-radius:6px;
+  border:1px solid var(--sand);
+  background:var(--cream);
+  min-width:140px;
+}
+.iter-date:focus{
+  outline:none;
+  border-color:var(--teal-m);
+  background:var(--flora);
+  box-shadow:0 0 0 3px rgba(93,167,178,.15);
+}
+.iter-row.is-done .iter-date{
+  background:var(--moss-l);
+  border-color:var(--moss);
+}
+.iter-clear-btn{
+  background:transparent;
+  border:none;
+  color:var(--grey-m);
+  padding:6px 10px;
+  border-radius:6px;
+  font-family:var(--mono);
+  font-size:10px;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  font-weight:600;
+  cursor:pointer;
+  transition:color .2s ease, background .2s ease;
+}
+.iter-clear-btn:hover{color:var(--story);background:var(--story-l);}
+.iter-add-btn{
+  align-self:flex-start;
+  background:transparent;
+  color:var(--teal);
+  border:1px dashed var(--teal-m);
+  border-radius:8px;
+  padding:9px 16px;
+  font-family:var(--mono);
+  font-size:11px;
+  font-weight:600;
+  letter-spacing:.12em;
+  text-transform:uppercase;
+  cursor:pointer;
+  transition:background .2s ease, border-style .2s ease;
+  margin-top:6px;
+}
+.iter-add-btn:hover{background:var(--teal-l);border-style:solid;}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* TOAST (Kopierhinweis, Save-Erfolg)                           */
+/* ═══════════════════════════════════════════════════════════ */
+.toast{
+  position:fixed;
+  bottom:30px;
+  left:50%;
+  transform:translateX(-50%) translateY(20px);
+  background:var(--teal);
+  color:var(--flora);
+  padding:14px 26px;
+  border-radius:100px;
+  font-family:var(--mono);
+  font-size:12px;
+  font-weight:600;
+  letter-spacing:.14em;
+  text-transform:uppercase;
+  box-shadow:0 20px 40px -16px rgba(11,57,72,.4);
+  opacity:0;
+  pointer-events:none;
+  transition:opacity .3s ease, transform .3s ease;
+  z-index:200;
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+}
+.toast.show{
+  opacity:1;
+  transform:translateX(-50%) translateY(0);
+}
+.toast.success{background:var(--moss-d);}
+.toast.error{background:var(--story-d);}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* PRINT LAYOUTS for PDF export                                 */
+/* ═══════════════════════════════════════════════════════════ */
+@media print{
+  @page{margin:18mm 16mm;}
+  body{background:#ffffff;}
+
+  /* Standard hides */
+  .concept-badge,
+  .brand-bar,
+  .toolbar,
+  .toast,
+  .rail,
+  .add-cta,
+  .pitch,
+  .generator,
+  .foot,
+  .station-empty,
+  .topo-layer,
+  .path-spine,
+  .pin,
+  .station-pin-col,
+  .hero::before,
+  .hero::after{display:none !important;}
+
+  *::after,
+  *::before{
+    content:none !important;
+    display:none !important;
+  }
+  /* Topo pseudo-elements are already off above — remove hero background */
+  .hero{background:#ffffff !important;}
+
+  /* Hero more compact */
+  .hero{
+    min-height:auto;
+    padding:0 0 12mm;
+    page-break-after:avoid;
+  }
+  .hero-inner{grid-template-columns:1fr !important;gap:6mm !important;}
+  .leitfragen{display:none;}
+  .hero-title{font-size:42pt !important;margin-bottom:6mm !important;line-height:.95 !important;}
+  .hero-lead{font-size:12pt !important;margin-bottom:6mm !important;}
+  .hero-meta{display:none;}
+  .hero-eyebrow{font-size:9pt !important;margin-bottom:6mm !important;color:#3d3a36 !important;}
+
+  /* Terrain */
+  .terrain{padding:0 !important;}
+  .station{
+    display:block !important;
+    padding:4mm 0 !important;
+    opacity:1 !important;
+    transform:none !important;
+    page-break-inside:avoid;
+  }
+  /* Hide empty card spacers (on the even side), otherwise empty boxes appear */
+  .station-card-left:not(.station-card),
+  .station-card-right:not(.station-card){display:none !important;}
+  .station-card{
+    box-shadow:none !important;
+    border:1px solid #d8d3c5 !important;
+    padding:7mm 8mm !important;
+    max-width:none !important;
+    width:100% !important;
+    transform:none !important;
+    border-radius:4mm !important;
+    background:#fafaf5 !important;
+  }
+  .card-eyebrow{font-size:9pt !important;margin-bottom:3mm !important;}
+  .card-title{font-size:22pt !important;line-height:1.05 !important;margin-bottom:3mm !important;}
+  .card-quote{
+    font-size:12pt !important;
+    padding:3mm 0 !important;
+    margin-bottom:4mm !important;
+    border-bottom:1px solid #d8d3c5 !important;
+  }
+  .card-quote::before{display:none !important;}
+  .answers{gap:3.5mm !important;}
+  .answer{padding:2mm 0 0 4mm !important;}
+  .answer-glyph{width:6mm !important;height:6mm !important;}
+  .answer-label{font-size:8.5pt !important;}
+  .answer-text{font-size:10.5pt !important;padding-left:7mm !important;line-height:1.55 !important;}
+  .answer-text.empty{display:none !important;}
+
+  /* PDF layout: CARD SHEET (1 page, compact) */
+  body.print-karte .answers{display:none !important;}
+  body.print-karte .card-quote{margin-bottom:0 !important;border-bottom:none !important;padding:1mm 0 !important;}
+  body.print-karte .station-card{padding:4mm 6mm !important;}
+  body.print-karte .station{padding:2mm 0 !important;}
+  body.print-karte .card-title{font-size:18pt !important;margin-bottom:2mm !important;}
+  body.print-karte .hero{padding-bottom:6mm !important;}
+  body.print-karte .hero-title{font-size:34pt !important;}
+  body.print-karte .hero-lead{font-size:10.5pt !important;margin-bottom:4mm !important;}
+
+  /* PDF layout: OVERVIEW (2–3 pages) — defaults above apply */
+
+  /* PDF layout: LONG-FORM (4+ pages) — generous */
+  body.print-langform .station{page-break-after:always;}
+  body.print-langform .station:last-of-type{page-break-after:auto;}
+  body.print-langform .station-card{padding:14mm 12mm !important;}
+  body.print-langform .card-title{font-size:32pt !important;margin-bottom:5mm !important;}
+  body.print-langform .card-quote{font-size:14pt !important;padding:5mm 0 !important;margin-bottom:7mm !important;}
+  body.print-langform .answer-text{font-size:12pt !important;line-height:1.72 !important;}
+  body.print-langform .answers{gap:6mm !important;}
+}
+
+/* ═══════════════════════════════════════════════════════════ */
+/* SELECTION                                                    */
+/* ═══════════════════════════════════════════════════════════ */
+::selection{background:var(--gold-l);color:var(--teal-d);}
+
+</style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- BRAND BAR — Changemaker logo + program                       -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<header class="brand-bar">
+  <img class="brand-logo" src="data:image/png;base64,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" alt="Changemaker Career Coaching">
+  <div class="brand-program">
+    <div class="brand-program-label">Program</div>
+    <div class="brand-program-name">Career Architecture</div>
+    <div class="brand-program-module">Module 04 · Storyline</div>
+  </div>
+</header>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- TOOLBAR — JSON save/load + auto-save status                   -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="toolbar">
+  <button class="toolbar-btn" id="exportJsonBtn" title="Save Storyline as JSON file">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+    Save
+  </button>
+  <button class="toolbar-btn" id="importJsonBtn" title="Load JSON file">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+    Load
+  </button>
+  <div class="toolbar-status" id="autosaveStatus">Auto-save on</div>
+  <input type="file" id="importJsonInput" accept="application/json,.json" style="display:none">
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- HERO                                                          -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section class="hero">
+  <!-- Topography lines — gold contour with story-red accent -->
+  <div class="topo-layer" aria-hidden="true">
+    <svg viewBox="0 0 1400 600" preserveAspectRatio="none">
+      <path class="topo-line" d="M -50 120 Q 200 80 400 130 T 800 110 T 1200 140 T 1500 100"/>
+      <path class="topo-line" d="M -50 180 Q 220 140 440 200 T 820 170 T 1220 220 T 1500 190" style="opacity:.4"/>
+      <path class="topo-line story" d="M -50 240 Q 240 200 460 260 T 840 230 T 1240 270 T 1500 240"/>
+      <path class="topo-line" d="M -50 340 Q 260 300 480 360 T 860 330 T 1260 370 T 1500 340" style="opacity:.28"/>
+      <path class="topo-line" d="M -50 420 Q 280 380 500 440 T 880 410 T 1280 450 T 1500 420" style="opacity:.22"/>
+      <path class="topo-line story" d="M -50 480 Q 300 440 520 500 T 900 470 T 1300 510 T 1500 480"/>
+    </svg>
+  </div>
+
+  <div class="hero-inner">
+    <div>
+      <div class="hero-eyebrow">The paths of a professional journey</div>
+      <h1 class="hero-title">Your red<br/><span class="hero-title-em">thread.</span></h1>
+      <p class="hero-lead">The stations of a professional journey — connected by motivation and impact. The path becomes a <em class="hero-lead-em">Winner Story</em> that carries you straight to the next signed contract.</p>
+      <div class="hero-meta">
+        <div class="hero-meta-item"><span class="hero-meta-dot"></span><span>3–7 stations</span></div>
+        <div class="hero-meta-item"><span class="hero-meta-dot"></span><span>3 guiding questions per station</span></div>
+        <div class="hero-meta-item"><span class="hero-meta-dot"></span><span>Card Sheet · Overview · Long-form</span></div>
+      </div>
+    </div>
+
+    <!-- Guiding-questions stack -->
+    <div class="leitfragen">
+      <div class="leitfrage">
+        <div class="leitfrage-num">
+          <span class="leitfrage-num-glyph">1</span>
+          <span>First Question</span>
+        </div>
+        <div class="leitfrage-text">Why did I take this job?</div>
+        <span class="leitfrage-key">Motivation</span>
+      </div>
+      <div class="leitfrage">
+        <div class="leitfrage-num">
+          <span class="leitfrage-num-glyph">2</span>
+          <span>Second Question</span>
+        </div>
+        <div class="leitfrage-text">What was the most important outcome?</div>
+        <span class="leitfrage-key">Impact</span>
+      </div>
+      <div class="leitfrage">
+        <div class="leitfrage-num">
+          <span class="leitfrage-num-glyph">3</span>
+          <span>Third Question</span>
+        </div>
+        <div class="leitfrage-text">What motivation emerges for the next step?</div>
+        <span class="leitfrage-key">Next Step</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PROGRESS RAIL                                                 -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<div class="rail">
+  <div class="rail-inner">
+    <div class="rail-stat">
+      <div>
+        <div class="rail-num">4<span class="rail-num-frac"> / 7</span></div>
+        <div class="rail-label">Stations shaped</div>
+      </div>
+    </div>
+    <div class="rail-progress" aria-label="Progress 4 of 7">
+      <div class="rail-progress-fill"></div>
+      <div class="rail-progress-markers">
+        <div class="rail-marker filled"></div>
+        <div class="rail-marker filled"></div>
+        <div class="rail-marker filled"></div>
+        <div class="rail-marker filled"></div>
+        <div class="rail-marker"></div>
+        <div class="rail-marker"></div>
+        <div class="rail-marker"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- TERRAIN                                                       -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section class="terrain">
+  <div class="terrain-inner">
+
+    <!-- Central path line — THE red thread, continuous with glow -->
+    <div class="path-spine" aria-hidden="true">
+      <svg viewBox="0 0 200 2000" preserveAspectRatio="none">
+        <path class="path-line-glow" d="M 100 0
+          C 120 250, 80 500, 100 750
+          C 120 1000, 80 1250, 100 1500
+          C 120 1750, 80 1900, 100 2000"/>
+        <path class="path-line" d="M 100 0
+          C 120 250, 80 500, 100 750
+          C 120 1000, 80 1250, 100 1500
+          C 120 1750, 80 1900, 100 2000"/>
+      </svg>
+    </div>
+
+    <!-- Station 1 — B1 · Beginning -->
+    <div class="station b1" data-station="0">
+      <div class="station-card-left station-card">
+        <div class="card-eyebrow">
+          <span>Station 01</span>
+          <span class="card-eyebrow-sep">·</span>
+          <span class="editable-field" data-field="zeitraum">2010 – 2014</span>
+          <span class="card-eyebrow-sep">·</span>
+          <span class="editable-field" data-field="unternehmen">Maxwell &amp; Partners</span>
+        </div>
+        <h2 class="card-title">Strategy<br/>Consultant.</h2>
+        <p class="card-quote">Learn the craft first — before you raise your own buildings.</p>
+        <div class="answers">
+          <div class="answer warum">
+            <div class="answer-head">
+              <span class="answer-glyph">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" fill="currentColor"/></svg>
+              </span>
+              <span class="answer-label">Why · Motivation</span>
+            </div>
+            <p class="answer-text">The wish to work through complex problems with structure — and to learn at the highest level what strategic consulting really means.</p>
+          </div>
+          <div class="answer was">
+            <div class="answer-head">
+              <span class="answer-glyph">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
+              </span>
+              <span class="answer-label">What · Impact</span>
+            </div>
+            <p class="answer-text">Led four international M&amp;A projects. Carried an 80-million carve-out for a consumer goods manufacturer to closing in 14 months.</p>
+          </div>
+          <div class="answer wohin">
+            <div class="answer-head">
+              <span class="answer-glyph">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+              <span class="answer-label">Next · Step</span>
+            </div>
+            <p class="answer-text">Closer to execution. Consulting sets the structures — I wanted to build them myself.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="station-pin-col">
+        <div class="pin filled" data-pin="1">
+          <svg class="pin-svg" viewBox="0 0 100 100">
+            <circle class="outer" cx="50" cy="50" r="46" fill="var(--flora)" stroke="var(--b1)" stroke-width="2.5"/>
+            <circle cx="50" cy="50" r="36" fill="var(--b1)"/>
+            <circle cx="50" cy="50" r="9" fill="var(--story)"/>
+            <line x1="50" y1="8" x2="50" y2="22" stroke="var(--flora)" stroke-width="1.4" opacity=".9"/>
+            <line x1="50" y1="78" x2="50" y2="92" stroke="var(--flora)" stroke-width="1.4" opacity=".9"/>
+            <line x1="8" y1="50" x2="22" y2="50" stroke="var(--flora)" stroke-width="1.4" opacity=".9"/>
+            <line x1="78" y1="50" x2="92" y2="50" stroke="var(--flora)" stroke-width="1.4" opacity=".9"/>
+          </svg>
+          <span class="pin-num">01</span>
+        </div>
+      </div>
+
+      <div class="station-card-right"></div>
+    </div>
+
+    <!-- Station 2 — B1 · Build-up -->
+    <div class="station b1" data-station="1">
+      <div class="station-card-left"></div>
+
+      <div class="station-pin-col">
+        <div class="pin filled" data-pin="2">
+          <svg class="pin-svg" viewBox="0 0 100 100">
+            <circle class="outer" cx="50" cy="50" r="46" fill="var(--flora)" stroke="var(--b1)" stroke-width="2.5"/>
+            <circle cx="50" cy="50" r="36" fill="var(--b1)"/>
+            <circle cx="50" cy="50" r="9" fill="var(--story)"/>
+            <line x1="50" y1="8" x2="50" y2="22" stroke="var(--flora)" stroke-width="1.4" opacity=".9"/>
+            <line x1="50" y1="78" x2="50" y2="92" stroke="var(--flora)" stroke-width="1.4" opacity=".9"/>
+            <line x1="8" y1="50" x2="22" y2="50" stroke="var(--flora)" stroke-width="1.4" opacity=".9"/>
+            <line x1="78" y1="50" x2="92" y2="50" stroke="var(--flora)" stroke-width="1.4" opacity=".9"/>
+          </svg>
+          <span class="pin-num">02</span>
+        </div>
+      </div>
+
+      <div class="station-card-right station-card">
+        <div class="card-eyebrow">
+          <span>Station 02</span>
+          <span class="card-eyebrow-sep">·</span>
+          <span class="editable-field" data-field="zeitraum">2014 – 2018</span>
+          <span class="card-eyebrow-sep">·</span>
+          <span class="editable-field" data-field="unternehmen">Bromer Industries</span>
+        </div>
+        <h2 class="card-title">Head of<br/>Strategy.</h2>
+        <p class="card-quote">From recommending to owning — a different discipline.</p>
+        <div class="answers">
+          <div class="answer warum">
+            <div class="answer-head">
+              <span class="answer-glyph">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" fill="currentColor"/></svg>
+              </span>
+              <span class="answer-label">Why · Motivation</span>
+            </div>
+            <p class="answer-text">Building a strategy function in a mid-sized group that did not have one before. From consultant to owner.</p>
+          </div>
+          <div class="answer was">
+            <div class="answer-head">
+              <span class="answer-glyph">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
+              </span>
+              <span class="answer-label">What · Impact</span>
+            </div>
+            <p class="answer-text">Built the strategy team to eight people. Prepared three acquisitions, two of them successfully integrated. Established US market entry with an own subsidiary.</p>
+          </div>
+          <div class="answer wohin">
+            <div class="answer-head">
+              <span class="answer-glyph">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+              <span class="answer-label">Next · Step</span>
+            </div>
+            <p class="answer-text">I had hit my ceiling below the executive board. The next step was operational ownership with my own P&amp;L.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Station 3 — B2 · Substance -->
+    <div class="station b2" data-station="2">
+      <div class="station-card-left station-card">
+        <div class="card-eyebrow">
+          <span>Station 03</span>
+          <span class="card-eyebrow-sep">·</span>
+          <span class="editable-field" data-field="zeitraum">2018 – 2022</span>
+          <span class="card-eyebrow-sep">·</span>
+          <span class="editable-field" data-field="unternehmen">Carve &amp; Co</span>
+        </div>
+        <h2 class="card-title">Business<br/>Unit<br/>Head.</h2>
+        <p class="card-quote">P&amp;L ownership — the test of whether the theory holds.</p>
+        <div class="answers">
+          <div class="answer warum">
+            <div class="answer-head">
+              <span class="answer-glyph">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" fill="currentColor"/></svg>
+              </span>
+              <span class="answer-label">Why · Motivation</span>
+            </div>
+            <p class="answer-text">P&amp;L ownership of a division with 180 employees. Finally closing the bridge from strategy to operations.</p>
+          </div>
+          <div class="answer was">
+            <div class="answer-head">
+              <span class="answer-glyph">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
+              </span>
+              <span class="answer-label">What · Impact</span>
+            </div>
+            <p class="answer-text">EBIT doubled in three years. Restructured DACH sales, launched a new product line, led international growth into France.</p>
+          </div>
+          <div class="answer wohin">
+            <div class="answer-head">
+              <span class="answer-glyph">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+              <span class="answer-label">Next · Step</span>
+            </div>
+            <p class="answer-text">Over time, the strategic altitude was missing. I lacked the full view on a company — not only on a division.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="station-pin-col">
+        <div class="pin filled" data-pin="3">
+          <svg class="pin-svg" viewBox="0 0 100 100">
+            <circle class="outer" cx="50" cy="50" r="46" fill="var(--flora)" stroke="var(--b2)" stroke-width="2.5"/>
+            <circle cx="50" cy="50" r="36" fill="var(--b2)"/>
+            <circle cx="50" cy="50" r="9" fill="var(--story)"/>
+            <line x1="50" y1="8" x2="50" y2="22" stroke="var(--flora)" stroke-width="1.4" opacity=".9"/>
+            <line x1="50" y1="78" x2="50" y2="92" stroke="var(--flora)" stroke-width="1.4" opacity=".9"/>
+            <line x1="8" y1="50" x2="22" y2="50" stroke="var(--flora)" stroke-width="1.4" opacity=".9"/>
+            <line x1="78" y1="50" x2="92" y2="50" stroke="var(--flora)" stroke-width="1.4" opacity=".9"/>
+          </svg>
+          <span class="pin-num">03</span>
+        </div>
+      </div>
+
+      <div class="station-card-right"></div>
+    </div>
+
+    <!-- Station 4 — B2 · current, highlight pin -->
+    <div class="station b2 current" data-station="3">
+      <div class="station-card-left"></div>
+
+      <div class="station-pin-col">
+        <div class="pin filled current" data-pin="4">
+          <svg class="pin-svg" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="48" fill="var(--story-l)" opacity=".6"/>
+            <circle class="outer" cx="50" cy="50" r="42" fill="var(--story)" stroke="var(--story-d)" stroke-width="3"/>
+            <circle cx="50" cy="50" r="32" fill="var(--b2)"/>
+            <circle cx="50" cy="50" r="11" fill="var(--story-d)"/>
+            <line x1="50" y1="5" x2="50" y2="22" stroke="var(--story-d)" stroke-width="2"/>
+            <line x1="50" y1="78" x2="50" y2="95" stroke="var(--story-d)" stroke-width="2"/>
+            <line x1="5" y1="50" x2="22" y2="50" stroke="var(--story-d)" stroke-width="2"/>
+            <line x1="78" y1="50" x2="95" y2="50" stroke="var(--story-d)" stroke-width="2"/>
+          </svg>
+          <span class="pin-num">04</span>
+        </div>
+      </div>
+
+      <div class="station-card-right station-card">
+        <div class="card-eyebrow">
+          <span>Station 04 · current</span>
+          <span class="card-eyebrow-sep">·</span>
+          <span class="editable-field" data-field="zeitraum">2022 – today</span>
+          <span class="card-eyebrow-sep">·</span>
+          <span class="editable-field" data-field="unternehmen">Drechsler Group</span>
+        </div>
+        <h2 class="card-title">CSO.</h2>
+        <p class="card-quote">Full strategic ownership — the point where the architecture question arises.</p>
+        <div class="answers">
+          <div class="answer warum">
+            <div class="answer-head">
+              <span class="answer-glyph">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" fill="currentColor"/></svg>
+              </span>
+              <span class="answer-label">Why · Motivation</span>
+            </div>
+            <p class="answer-text">Full strategic ownership of a group in transformation. The largest task of my career.</p>
+          </div>
+          <div class="answer was">
+            <div class="answer-head">
+              <span class="answer-glyph">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg>
+              </span>
+              <span class="answer-label">What · Impact</span>
+            </div>
+            <p class="answer-text">Prepared the transformation of a family business into a public company. Closed three strategic acquisitions, built a new business unit. Reshaped the CSO function.</p>
+          </div>
+          <div class="answer wohin">
+            <div class="answer-head">
+              <span class="answer-glyph">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+              </span>
+              <span class="answer-label">Next · Step</span>
+            </div>
+            <p class="answer-text empty" data-placeholder="Click to fill in — the open question that triggers this architecture work.">Click to fill in — the open question that triggers this architecture work.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Station 5 — B3 · Empty/Next — where the red thread continues -->
+    <div class="station station-empty b3" data-station="4">
+      <div class="station-card-left station-card" id="addStationCard">
+        <div class="empty-title">Add next station</div>
+        <p class="empty-text">Click opens the next station with all fields as placeholders. The card then slides down.</p>
+      </div>
+
+      <div class="station-pin-col">
+        <div class="pin empty" data-pin="5">
+          <svg class="pin-svg" viewBox="0 0 100 100">
+            <circle class="outer" cx="50" cy="50" r="46" fill="var(--flora)" stroke="var(--story)" stroke-width="2.5"/>
+            <circle cx="50" cy="50" r="36" fill="none" stroke="var(--story)" stroke-width="1" stroke-dasharray="3 5" opacity=".7"/>
+            <line x1="38" y1="50" x2="62" y2="50" stroke="var(--story)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="50" y1="38" x2="50" y2="62" stroke="var(--story)" stroke-width="2.5" stroke-linecap="round"/>
+          </svg>
+          <span class="pin-num">05</span>
+        </div>
+      </div>
+
+      <div class="station-card-right"></div>
+    </div>
+
+  </div>
+
+  <!-- Add Station CTA -->
+  <div class="add-cta">
+    <button class="add-btn" id="addBtn">
+      <span class="add-btn-icon">+</span>
+      <span>Add next station</span>
+    </button>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- PITCH WORKSHOP — three lengths × recording iterations         -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section class="pitch">
+  <div class="pitch-inner">
+    <div class="pitch-header">
+      <div class="pitch-eyebrow">Pitch Workshop · in parallel with the sessions</div>
+      <h2 class="pitch-title">The red thread<br><span class="pitch-title-em">in three lengths.</span></h2>
+      <p class="pitch-lead">The process starts at five minutes — you tell the full story, record it, and send it to Katrin. Feedback comes back, you sharpen, as many loops as it takes. Then you condense down to three minutes. That is the actual goal: a story with enough hooks so the person across from you absolutely wants to hear more. The one-minute version comes as an optional extra — for elevator situations.</p>
+    </div>
+
+    <div class="pitch-grid">
+
+      <!-- Stage 01 · First Round (5 minutes) -->
+      <div class="pitch-card b1" data-pitch="long">
+        <div class="pitch-card-head">
+          <div>
+            <div class="pitch-len">5<span class="pitch-len-unit">min</span></div>
+            <div class="pitch-name">01 · First Round</div>
+          </div>
+        </div>
+        <p class="pitch-purpose">The full story — here you take your time. Record, send to Katrin, work in the feedback. As many loops as it takes.</p>
+        <div class="pitch-text" contenteditable="true" data-pitch-text="long"></div>
+        <div class="pitch-actions">
+          <button class="pitch-copy-btn" type="button" data-copy="long">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy text
+          </button>
+        </div>
+        <div class="pitch-prompt">
+          <span class="pitch-prompt-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </span>
+          <div class="pitch-prompt-text">
+            <strong>Next step</strong>
+            Record a maximum 5-minute version as a voice message and send it to Katrin.
+          </div>
+        </div>
+        <div class="iterations">
+          <div class="iterations-head">
+            <span>Loops</span>
+            <span class="iter-count" data-iter-count="long">0 loops</span>
+          </div>
+          <div class="iter-list" data-iter-list="long"></div>
+          <button class="iter-add-btn" type="button" data-iter-add="long">+ another loop</button>
+        </div>
+      </div>
+
+      <!-- Stage 02 · Final Form (3 minutes) — the main goal -->
+      <div class="pitch-card b2 is-primary" data-pitch="mid">
+        <div class="pitch-card-badge">Final Form</div>
+        <div class="pitch-card-head">
+          <div>
+            <div class="pitch-len">3<span class="pitch-len-unit">min</span></div>
+            <div class="pitch-name">02 · The Actual Goal</div>
+          </div>
+        </div>
+        <p class="pitch-purpose">The story you stand on solid ground with at the end. Condensed — with enough hooks so the person across from you absolutely wants to keep asking.</p>
+        <div class="pitch-text" contenteditable="true" data-pitch-text="mid"></div>
+        <div class="pitch-actions">
+          <button class="pitch-copy-btn" type="button" data-copy="mid">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy text
+          </button>
+        </div>
+        <div class="pitch-prompt">
+          <span class="pitch-prompt-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </span>
+          <div class="pitch-prompt-text">
+            <strong>Next step</strong>
+            Record a maximum 3-minute version as a voice message now and send it to Katrin.
+          </div>
+        </div>
+        <div class="iterations">
+          <div class="iterations-head">
+            <span>Loops</span>
+            <span class="iter-count" data-iter-count="mid">0 loops</span>
+          </div>
+          <div class="iter-list" data-iter-list="mid"></div>
+          <button class="iter-add-btn" type="button" data-iter-add="mid">+ another loop</button>
+        </div>
+      </div>
+
+      <!-- Stage 03 · Elevator (1 minute) — optional -->
+      <div class="pitch-card b3 is-optional" data-pitch="short">
+        <div class="pitch-card-badge is-soft">Optional</div>
+        <div class="pitch-card-head">
+          <div>
+            <div class="pitch-len">1<span class="pitch-len-unit">min</span></div>
+            <div class="pitch-name">03 · Elevator</div>
+          </div>
+        </div>
+        <p class="pitch-purpose">For elevator situations, short pre-pitches, or quickly opening a conversation. Follows from the three-minute story.</p>
+        <div class="pitch-text" contenteditable="true" data-pitch-text="short"></div>
+        <div class="pitch-actions">
+          <button class="pitch-copy-btn" type="button" data-copy="short">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            Copy text
+          </button>
+        </div>
+        <div class="pitch-prompt">
+          <span class="pitch-prompt-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="23"/><line x1="8" y1="23" x2="16" y2="23"/></svg>
+          </span>
+          <div class="pitch-prompt-text">
+            <strong>Next step</strong>
+            Record a maximum 1-minute version as a voice message now and send it to Katrin.
+          </div>
+        </div>
+        <div class="iterations">
+          <div class="iterations-head">
+            <span>Loops</span>
+            <span class="iter-count" data-iter-count="short">0 loops</span>
+          </div>
+          <div class="iter-list" data-iter-list="short"></div>
+          <button class="iter-add-btn" type="button" data-iter-add="short">+ another loop</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════ -->
+<!-- GENERATOR                                                     -->
+<!-- ═══════════════════════════════════════════════════════════ -->
+<section class="generator">
+  <!-- Topography here too, but gold-light on teal -->
+  <div class="topo-layer" aria-hidden="true">
+    <svg viewBox="0 0 1400 600" preserveAspectRatio="none">
+      <path class="topo-line" d="M -50 120 Q 200 80 400 130 T 800 110 T 1200 140 T 1500 100" style="stroke:var(--gold-l);opacity:.12"/>
+      <path class="topo-line" d="M -50 200 Q 220 160 440 220 T 820 190 T 1220 240 T 1500 210" style="stroke:var(--gold-l);opacity:.09"/>
+      <path class="topo-line" d="M -50 320 Q 260 280 480 340 T 860 310 T 1260 350 T 1500 320" style="stroke:var(--gold-l);opacity:.06"/>
+      <path class="topo-line" d="M -50 480 Q 300 440 520 500 T 900 470 T 1300 510 T 1500 480" style="stroke:var(--gold-l);opacity:.04"/>
+    </svg>
+  </div>
+
+  <div class="generator-inner">
+    <div>
+      <div class="generator-eyebrow">PDF Export</div>
+      <h2 class="generator-title">Show your<br/><span class="generator-title-em">success story.</span></h2>
+    </div>
+
+    <div class="generator-options">
+      <button class="gen-option" type="button" data-layout="karte">
+        <span class="gen-option-len">1 pg.</span>
+        <span class="gen-option-body">
+          <span class="gen-option-name">Card Sheet</span>
+          <span class="gen-option-desc">One page. Stations condensed, for the folder.</span>
+        </span>
+        <span class="gen-option-arrow">→</span>
+      </button>
+      <button class="gen-option" type="button" data-layout="uebersicht">
+        <span class="gen-option-len">2–3 pg.</span>
+        <span class="gen-option-body">
+          <span class="gen-option-name">Overview</span>
+          <span class="gen-option-desc">Complete Storyline. For headhunters and recruiters.</span>
+        </span>
+        <span class="gen-option-arrow">→</span>
+      </button>
+      <button class="gen-option" type="button" data-layout="langform">
+        <span class="gen-option-len">4+ pg.</span>
+        <span class="gen-option-body">
+          <span class="gen-option-name">Long-form</span>
+          <span class="gen-option-desc">Extensive, with context. For profile, about page, inbox.</span>
+        </span>
+        <span class="gen-option-arrow">→</span>
+      </button>
+
+    </div>
+  </div>
+</section>
+
+<div class="foot">
+  <div class="foot-bar"></div>
+  <div class="foot-brand">
+    <img class="foot-logo" src="data:image/png;base64,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" alt="Changemaker Career Coaching">
+  </div>
+  <div class="foot-meta">Career Architecture · Module 04 · Storyline</div>
+</div>
+
+<!-- Toast element for copy/save notices -->
+<div class="toast" id="toast">
+  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+  <span id="toastText">Done</span>
+</div>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// SCROLL REVEAL for stations
+// ═══════════════════════════════════════════════════════════
+function attachScrollReveal(station){
+  if(!('IntersectionObserver' in window)){
+    station.classList.add('in-view');
+    return;
+  }
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        e.target.classList.add('in-view');
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: .15, rootMargin: '0px 0px -80px 0px' });
+  obs.observe(station);
+}
+
+(function(){
+  document.querySelectorAll('.station').forEach(attachScrollReveal);
+})();
+
+// ═══════════════════════════════════════════════════════════
+// EDIT-IN-PLACE via event delegation
+// ═══════════════════════════════════════════════════════════
+// Instead of attaching individual handlers to every element, we catch clicks
+// at the document level. Works for dynamically created fields as well.
+// All texts are editable — both filled and placeholder.
+// ═══════════════════════════════════════════════════════════
+
+function startEditing(el){
+  if(el.getAttribute('contenteditable') === 'true') return;
+
+  // Remember original text / placeholder on first access
+  if(!el.dataset.placeholder){
+    el.dataset.placeholder = el.textContent.trim();
+  }
+
+  // In placeholder state: clear content so the user can type directly
+  const isPlaceholder = el.classList.contains('empty') || el.classList.contains('placeholder');
+  if(isPlaceholder){
+    el.textContent = '';
+  }
+  el.setAttribute('contenteditable', 'true');
+  el.classList.remove('empty');
+  el.focus();
+
+  // Cursor to the end (or select all content for non-placeholders)
+  const range = document.createRange();
+  range.selectNodeContents(el);
+  if(isPlaceholder){
+    range.collapse(false);
+  }
+  const sel = window.getSelection();
+  sel.removeAllRanges();
+  sel.addRange(range);
+}
+
+function stopEditing(el){
+  el.removeAttribute('contenteditable');
+  if(!el.textContent.trim()){
+    // Left empty → restore placeholder
+    el.textContent = el.dataset.placeholder || 'Click to fill in.';
+    if(el.classList.contains('answer-text')){
+      el.classList.add('empty');
+    } else {
+      el.classList.add('placeholder');
+    }
+  } else {
+    // Content entered → remove placeholder status
+    el.classList.remove('empty');
+    el.classList.remove('placeholder');
+  }
+}
+
+// On page load: imprint the original placeholder on all relevant elements
+(function(){
+  document.querySelectorAll('.answer-text, .placeholder').forEach(el => {
+    if(!el.dataset.placeholder){
+      el.dataset.placeholder = el.textContent.trim();
+    }
+  });
+})();
+
+// Document-wide click delegation
+// Editable: all answer texts, card titles, card quotes, and placeholders
+const EDITABLE_SELECTOR = '.placeholder, .answer-text, .card-title, .card-quote, .editable-field';
+
+document.addEventListener('click', function(e){
+  // Click on the pin itself: do not edit, the pin handler takes over
+  if(e.target.closest('.pin')) return;
+  // Click on the empty card: createNewStation, not edit
+  if(e.target.closest('#addStationCard')) return;
+  // Click on generator buttons: PDF export, not edit
+  if(e.target.closest('.gen-option')) return;
+
+  const target = e.target.closest(EDITABLE_SELECTOR);
+  if(target){
+    e.stopPropagation();
+    startEditing(target);
+  }
+}, true); // Capture phase: catches BEFORE all other handlers
+
+// Document-wide blur delegation (focusout bubbles, blur does not)
+document.addEventListener('focusout', function(e){
+  const target = e.target;
+  if(target && target.matches && target.matches(EDITABLE_SELECTOR) && target.getAttribute('contenteditable') === 'true'){
+    stopEditing(target);
+  }
+}, true);
+
+// ═══════════════════════════════════════════════════════════
+// PIN CLICK — scrolls to the card and briefly highlights it
+// ═══════════════════════════════════════════════════════════
+function attachPinClick(pin){
+  pin.style.cursor = 'pointer';
+  pin.addEventListener('click', function(){
+    const station = this.closest('.station');
+    if(!station) return;
+    if(station.classList.contains('station-empty')){
+      createNewStation();
+      return;
+    }
+    const card = station.querySelector('.station-card');
+    if(!card) return;
+    card.scrollIntoView({behavior:'smooth', block:'center'});
+    card.style.transition = 'box-shadow .4s ease, transform .4s ease';
+    const oldShadow = card.style.boxShadow;
+    card.style.boxShadow = '0 28px 60px -16px rgba(220,38,38,.42), 0 0 0 3px rgba(220,38,38,.18)';
+    setTimeout(()=>{ card.style.boxShadow = oldShadow; }, 1400);
+  });
+}
+
+(function(){
+  document.querySelectorAll('.pin').forEach(attachPinClick);
+})();
+
+// ═══════════════════════════════════════════════════════════
+// ADD NEW STATION — the actual core
+// ═══════════════════════════════════════════════════════════
+function createNewStation(){
+  const filledStations = document.querySelectorAll('.station:not(.station-empty)');
+  const newNum = filledStations.length + 1;
+  const num = String(newNum).padStart(2, '0');
+  const nextEmptyNum = String(newNum + 1).padStart(2, '0');
+
+  // New station is placed in phase B3 (growth/future)
+  const stationHTML = `
+    <div class="station b3 new-station" data-station="${newNum - 1}">
+      <div class="station-card-left station-card">
+        <div class="card-eyebrow">
+          <span>Station ${num}</span>
+          <span class="card-eyebrow-sep">·</span>
+          <span class="editable-field placeholder" data-field="zeitraum" data-placeholder="Period">Period</span>
+          <span class="card-eyebrow-sep">·</span>
+          <span class="editable-field placeholder" data-field="unternehmen" data-placeholder="Company">Company</span>
+        </div>
+        <h2 class="card-title placeholder" data-placeholder="Enter role">Enter role</h2>
+        <p class="card-quote placeholder" data-placeholder="Short statement that condenses the station.">Short statement that condenses the station.</p>
+        <div class="answers">
+          <div class="answer warum">
+            <div class="answer-head">
+              <span class="answer-glyph"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M13 2L3 14h7l-1 8 10-12h-7l1-8z" fill="currentColor"/></svg></span>
+              <span class="answer-label">Why · Motivation</span>
+            </div>
+            <p class="answer-text empty" data-placeholder="Click to fill in — why this step?">Click to fill in — why this step?</p>
+          </div>
+          <div class="answer was">
+            <div class="answer-head">
+              <span class="answer-glyph"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="6"/></svg></span>
+              <span class="answer-label">What · Impact</span>
+            </div>
+            <p class="answer-text empty" data-placeholder="Click to fill in — what came of it?">Click to fill in — what came of it?</p>
+          </div>
+          <div class="answer wohin">
+            <div class="answer-head">
+              <span class="answer-glyph"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+              <span class="answer-label">Next · Step</span>
+            </div>
+            <p class="answer-text empty" data-placeholder="Click to fill in — where to from here?">Click to fill in — where to from here?</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="station-pin-col">
+        <div class="pin filled" data-pin="${newNum}">
+          <svg class="pin-svg" viewBox="0 0 100 100">
+            <circle class="outer" cx="50" cy="50" r="46" fill="var(--flora)" stroke="var(--b3)" stroke-width="2.5"/>
+            <circle cx="50" cy="50" r="36" fill="var(--b3)"/>
+            <circle cx="50" cy="50" r="9" fill="var(--story)"/>
+            <line x1="50" y1="8" x2="50" y2="22" stroke="var(--flora)" stroke-width="1.4" opacity=".9"/>
+            <line x1="50" y1="78" x2="50" y2="92" stroke="var(--flora)" stroke-width="1.4" opacity=".9"/>
+            <line x1="8" y1="50" x2="22" y2="50" stroke="var(--flora)" stroke-width="1.4" opacity=".9"/>
+            <line x1="78" y1="50" x2="92" y2="50" stroke="var(--flora)" stroke-width="1.4" opacity=".9"/>
+          </svg>
+          <span class="pin-num">${num}</span>
+        </div>
+      </div>
+
+      <div class="station-card-right"></div>
+    </div>
+  `;
+
+  // Find empty station — insert the new station before it
+  const emptyStation = document.querySelector('.station-empty');
+  if(!emptyStation) return;
+
+  emptyStation.insertAdjacentHTML('beforebegin', stationHTML);
+  const newStation = emptyStation.previousElementSibling;
+
+  // Empty station moved down — update pin number
+  const emptyPinNum = emptyStation.querySelector('.pin-num');
+  if(emptyPinNum) emptyPinNum.textContent = nextEmptyNum;
+  const emptyPinEl = emptyStation.querySelector('.pin');
+  if(emptyPinEl) emptyPinEl.dataset.pin = newNum + 1;
+  emptyStation.dataset.station = newNum;
+
+  // Edit handlers activate automatically via event delegation — no explicit attachment
+  // Imprint placeholder on the dataset so blur restores correctly
+  newStation.querySelectorAll('.answer-text, .placeholder').forEach(el => {
+    if(!el.dataset.placeholder){
+      el.dataset.placeholder = el.textContent.trim();
+    }
+  });
+
+  // Attach pin click handler to the new pin (pin click is not delegated)
+  newStation.querySelectorAll('.pin').forEach(attachPinClick);
+
+  // Make visible (animation)
+  requestAnimationFrame(() => {
+    newStation.classList.add('in-view');
+  });
+
+  // Smooth scroll
+  setTimeout(() => {
+    newStation.scrollIntoView({behavior:'smooth', block:'center'});
+  }, 240);
+
+  // Update rail
+  updateRail();
+}
+
+// ═══════════════════════════════════════════════════════════
+// RAIL MARKER CLICK — navigation to station
+// ═══════════════════════════════════════════════════════════
+function attachRailMarkerClicks(){
+  const stations = document.querySelectorAll('.station');
+  document.querySelectorAll('.rail-marker').forEach((marker, idx) => {
+    marker.addEventListener('click', () => {
+      const station = stations[idx];
+      if(!station) return;
+      const card = station.querySelector('.station-card') || station;
+      card.scrollIntoView({behavior:'smooth', block:'center'});
+      // Brief highlight
+      const oldBoxShadow = card.style.boxShadow;
+      card.style.transition = 'box-shadow .4s ease';
+      card.style.boxShadow = '0 28px 60px -16px rgba(220,38,38,.42), 0 0 0 3px rgba(220,38,38,.18)';
+      setTimeout(() => { card.style.boxShadow = oldBoxShadow; }, 1400);
+    });
+  });
+}
+
+(function(){
+  attachRailMarkerClicks();
+})();
+
+// ═══════════════════════════════════════════════════════════
+// RAIL UPDATE — progress display
+// ═══════════════════════════════════════════════════════════
+function updateRail(){
+  const filled = document.querySelectorAll('.station:not(.station-empty)').length;
+  const target = Math.max(7, filled + 2);
+
+  // Number + fraction
+  const railStat = document.querySelector('.rail-num');
+  if(railStat){
+    railStat.innerHTML = `${filled}<span class="rail-num-frac"> / ${target}</span>`;
+  }
+  const railLabel = document.querySelector('.rail-label');
+  if(railLabel) railLabel.textContent = 'Stations shaped';
+
+  // Progress fill
+  const fill = document.querySelector('.rail-progress-fill');
+  if(fill){
+    fill.style.width = `${Math.min(100, (filled/target)*100)}%`;
+  }
+
+  // Recreate markers
+  const markerContainer = document.querySelector('.rail-progress-markers');
+  if(markerContainer){
+    markerContainer.innerHTML = '';
+    for(let i = 0; i < target; i++){
+      const m = document.createElement('div');
+      m.className = 'rail-marker' + (i < filled ? ' filled' : '');
+      markerContainer.appendChild(m);
+    }
+    // Rewire click handlers after DOM creation
+    attachRailMarkerClicks();
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// WIRE ADD-STATION BUTTONS (bottom button + empty card)
+// ═══════════════════════════════════════════════════════════
+(function(){
+  const addBtn = document.getElementById('addBtn');
+  const emptyCard = document.getElementById('addStationCard');
+  if(addBtn) addBtn.addEventListener('click', createNewStation);
+  if(emptyCard) emptyCard.addEventListener('click', createNewStation);
+})();
+
+// ═══════════════════════════════════════════════════════════
+// GEN-OPTION — overridden below in app.js (actual PDF export)
+// ═══════════════════════════════════════════════════════════
+(function(){
+  // Default layout names for fallback (currently unused — tooltip texts)
+  const layoutNames = {
+    karte: 'Card Sheet (1 page)',
+    uebersicht: 'Overview (2–3 pages)',
+    langform: 'Long-form (4+ pages)'
+  };
+})();
+</script>
+
+<script>
+// ═══════════════════════════════════════════════════════════
+// CMKB STORYLINE · APP LAYER
+// State · LocalStorage · pitch generation · JSON I/O · PDF print
+// ═══════════════════════════════════════════════════════════
+(function(){
+  'use strict';
+
+  const STORAGE_KEY = 'cmkb-storyline-v4';
+
+  // ─────────── STATE ────────────────────────────────────────
+  const STATE = {
+    pitches: { long: '', mid: '', short: '' },
+    iterations: {
+      long:  [{date:''},{date:''},{date:''}],
+      mid:   [{date:''},{date:''},{date:''}],
+      short: [{date:''},{date:''},{date:''}]
+    }
+  };
+
+  // ─────────── LocalStorage ─────────────────────────────────
+  function saveState(){
+    const payload = {
+      version: 'v4',
+      saved_at: new Date().toISOString(),
+      stations: readStationsFromDom(),
+      pitches: STATE.pitches,
+      iterations: STATE.iterations
+    };
+    try{
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(payload));
+      flashAutosave();
+    }catch(e){
+      console.warn('LocalStorage write failed:', e);
+    }
+  }
+  function loadState(){
+    try{
+      const raw = localStorage.getItem(STORAGE_KEY);
+      return raw ? JSON.parse(raw) : null;
+    }catch(e){
+      return null;
+    }
+  }
+  let autosaveT;
+  function flashAutosave(){
+    const el = document.getElementById('autosaveStatus');
+    if(!el) return;
+    el.classList.add('is-saving');
+    el.textContent = 'Saving …';
+    clearTimeout(autosaveT);
+    autosaveT = setTimeout(()=>{
+      el.classList.remove('is-saving');
+      el.textContent = 'Saved';
+      setTimeout(()=>{ el.textContent = 'Auto-save on'; }, 1500);
+    }, 240);
+  }
+
+  // ─────────── Read stations from DOM ───────────────────────
+  function cleanText(html){
+    if(!html) return '';
+    return html
+      .replace(/-\s*<br\s*\/?>/gi, '')   // Remove hyphenation dashes before <br>
+      .replace(/<br\s*\/?>/gi, ' ')      // Remaining <br> as space
+      .replace(/<[^>]+>/g, '')           // Remove other inline tags
+      .replace(/&amp;/g, '&')
+      .replace(/&lt;/g, '<')
+      .replace(/&gt;/g, '>')
+      .replace(/&nbsp;/g, ' ')
+      .replace(/\s+/g, ' ')
+      .trim();
+  }
+  function readField(card, sel, isPlaceholder){
+    const el = card.querySelector(sel);
+    if(!el) return '';
+    if(isPlaceholder && el.classList.contains('placeholder')) return '';
+    if(el.classList.contains('empty')) return '';
+    return cleanText(el.innerHTML);
+  }
+  function readStationsFromDom(){
+    const out = [];
+    document.querySelectorAll('.station:not(.station-empty)').forEach(s => {
+      const card = s.querySelector('.station-card');
+      if(!card) return;
+      const zEl = card.querySelector('[data-field="zeitraum"]');
+      const uEl = card.querySelector('[data-field="unternehmen"]');
+      out.push({
+        bogen: s.classList.contains('b1') ? 'b1' : s.classList.contains('b2') ? 'b2' : 'b3',
+        current: s.classList.contains('current'),
+        zeitraum: zEl && !zEl.classList.contains('placeholder') ? cleanText(zEl.innerHTML) : '',
+        unternehmen: uEl && !uEl.classList.contains('placeholder') ? cleanText(uEl.innerHTML) : '',
+        title: readField(card, '.card-title', true),
+        quote: readField(card, '.card-quote', true),
+        warum: readField(card, '.answer.warum .answer-text', false),
+        was:   readField(card, '.answer.was .answer-text', false),
+        wohin: readField(card, '.answer.wohin .answer-text', false)
+      });
+    });
+    return out;
+  }
+
+  // ─────────── Pitch-Rendering ──────────────────────────────
+  function renderPitch(length){
+    const el = document.querySelector(`[data-pitch-text="${length}"]`);
+    if(!el) return;
+    el.textContent = STATE.pitches[length] || '';
+  }
+
+  // ─────────── Iterations-Tracker ───────────────────────────
+  function renderIterations(length){
+    const list    = document.querySelector(`[data-iter-list="${length}"]`);
+    const countEl = document.querySelector(`[data-iter-count="${length}"]`);
+    if(!list || !countEl) return;
+
+    const items = STATE.iterations[length] || [];
+    list.innerHTML = '';
+    items.forEach((iter, idx) => {
+      const row = document.createElement('div');
+      row.className = 'iter-row' + (iter.date ? ' is-done' : '');
+      row.innerHTML = `
+        <div class="iter-row-num">${idx + 1}</div>
+        <div class="iter-body">
+          <span class="iter-date-label">done on</span>
+          <input type="date" class="iter-date" value="${iter.date || ''}" data-iter-date="${length}-${idx}" aria-label="Date for loop ${idx+1}">
+        </div>
+        <button class="iter-clear-btn" type="button" data-iter-clear="${length}-${idx}" title="Clear date or remove loop">×</button>
+      `;
+      list.appendChild(row);
+    });
+
+    const done = items.filter(i => i.date).length;
+    countEl.textContent = done === 1 ? '1 loop' : `${done} loops`;
+    countEl.classList.toggle('is-complete', done >= 1);
+  }
+  function setIterationDate(length, idx, date){
+    if(!STATE.iterations[length][idx]) STATE.iterations[length][idx] = {};
+    STATE.iterations[length][idx].date = date;
+    renderIterations(length);
+    saveState();
+  }
+  function clearIteration(length, idx){
+    // Beyond 3: remove slot. Within the first 3: clear date only.
+    if(STATE.iterations[length].length > 3){
+      STATE.iterations[length].splice(idx, 1);
+    } else {
+      STATE.iterations[length][idx] = { date: '' };
+    }
+    renderIterations(length);
+    saveState();
+  }
+  function addIteration(length){
+    STATE.iterations[length].push({ date: '' });
+    renderIterations(length);
+    saveState();
+  }
+
+  // ─────────── Toast ────────────────────────────────────────
+  let toastT;
+  function showToast(msg, type){
+    const toast = document.getElementById('toast');
+    const text  = document.getElementById('toastText');
+    if(!toast || !text) return;
+    text.textContent = msg;
+    toast.className = 'toast show' + (type ? ' ' + type : '');
+    clearTimeout(toastT);
+    toastT = setTimeout(()=>{ toast.classList.remove('show'); }, 2400);
+  }
+
+  // ─────────── Clipboard ────────────────────────────────────
+  async function copyText(text){
+    try{
+      if(navigator.clipboard && window.isSecureContext){
+        await navigator.clipboard.writeText(text);
+        return true;
+      }
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      ta.style.position = 'fixed';
+      ta.style.top = '-9999px';
+      document.body.appendChild(ta);
+      ta.select();
+      const ok = document.execCommand('copy');
+      document.body.removeChild(ta);
+      return ok;
+    }catch(e){
+      return false;
+    }
+  }
+
+  // ─────────── JSON Export ──────────────────────────────────
+  function exportJson(){
+    const payload = {
+      version: 'v4',
+      exported_at: new Date().toISOString(),
+      stations: readStationsFromDom(),
+      pitches: STATE.pitches,
+      iterations: STATE.iterations
+    };
+    const blob = new Blob([JSON.stringify(payload, null, 2)], { type: 'application/json' });
+    const url  = URL.createObjectURL(blob);
+    const a    = document.createElement('a');
+    const ts   = new Date().toISOString().slice(0, 10);
+    a.href = url;
+    a.download = `storyline-${ts}.json`;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+    showToast('Saved as JSON', 'success');
+  }
+
+  // ─────────── JSON Import ──────────────────────────────────
+  function writeStationsToDom(stations){
+    const dom = document.querySelectorAll('.station:not(.station-empty)');
+    dom.forEach((s, i) => {
+      const data = stations[i];
+      if(!data) return;
+      const card = s.querySelector('.station-card');
+      if(!card) return;
+      const z = card.querySelector('[data-field="zeitraum"]');
+      const u = card.querySelector('[data-field="unternehmen"]');
+      const t = card.querySelector('.card-title');
+      const q = card.querySelector('.card-quote');
+      const w = card.querySelector('.answer.warum .answer-text');
+      const a = card.querySelector('.answer.was .answer-text');
+      const o = card.querySelector('.answer.wohin .answer-text');
+      if(z && data.zeitraum){ z.textContent = data.zeitraum; z.classList.remove('placeholder'); }
+      if(u && data.unternehmen){ u.textContent = data.unternehmen; u.classList.remove('placeholder'); }
+      if(t && data.title){ t.textContent = data.title; t.classList.remove('placeholder'); }
+      if(q && data.quote){ q.textContent = data.quote; q.classList.remove('placeholder'); }
+      if(w && data.warum){ w.textContent = data.warum; w.classList.remove('empty'); }
+      if(a && data.was){ a.textContent = data.was; a.classList.remove('empty'); }
+      if(o && data.wohin){ o.textContent = data.wohin; o.classList.remove('empty'); }
+    });
+  }
+  function importJsonFile(file){
+    const reader = new FileReader();
+    reader.onload = function(e){
+      try{
+        const data = JSON.parse(e.target.result);
+        if(data.pitches)    STATE.pitches    = Object.assign({long:'',mid:'',short:''}, data.pitches);
+        if(data.iterations) STATE.iterations = Object.assign(STATE.iterations, data.iterations);
+        if(Array.isArray(data.stations)) writeStationsToDom(data.stations);
+        ['long','mid','short'].forEach(k => { renderPitch(k); renderIterations(k); });
+        saveState();
+        showToast('Storyline loaded from JSON', 'success');
+      }catch(err){
+        showToast('File could not be read', 'error');
+        console.warn('Import failed', err);
+      }
+    };
+    reader.readAsText(file);
+  }
+
+  // ─────────── PDF export via browser print ─────────────────
+  function printPdf(layout){
+    document.body.classList.remove('print-karte','print-uebersicht','print-langform');
+    document.body.classList.add('print-' + layout);
+    // small delay so the layout takes effect
+    setTimeout(()=>{
+      window.print();
+      // Remove the print class again after the print dialog
+      setTimeout(()=>{ document.body.classList.remove('print-' + layout); }, 400);
+    }, 80);
+  }
+
+  // ─────────── EVENT WIRING ────────────────────────────────
+
+  // Edit pitch text → update STATE
+  document.addEventListener('input', function(e){
+    const pitchEl = e.target.closest && e.target.closest('[data-pitch-text]');
+    if(pitchEl){
+      const len = pitchEl.dataset.pitchText;
+      STATE.pitches[len] = pitchEl.textContent;
+      saveState();
+    }
+  });
+
+  // Buttons in pitch workshop
+  document.addEventListener('click', function(e){
+    const copyBtn = e.target.closest('[data-copy]');
+    if(copyBtn){
+      const len = copyBtn.dataset.copy;
+      const text = (STATE.pitches[len] || '').trim();
+      if(!text){
+        showToast('Pitch is empty — type something first', 'error');
+        return;
+      }
+      copyText(text).then(ok => {
+        if(ok){
+          copyBtn.classList.add('copied');
+          showToast('Text copied to clipboard', 'success');
+          setTimeout(()=> copyBtn.classList.remove('copied'), 1800);
+        } else {
+          showToast('Copy not possible', 'error');
+        }
+      });
+      return;
+    }
+    const addBtn2 = e.target.closest('[data-iter-add]');
+    if(addBtn2){
+      addIteration(addBtn2.dataset.iterAdd);
+      return;
+    }
+    const clearBtn = e.target.closest('[data-iter-clear]');
+    if(clearBtn){
+      const [length, idx] = clearBtn.dataset.iterClear.split('-');
+      clearIteration(length, parseInt(idx, 10));
+      return;
+    }
+  });
+
+  // Iteration date changed
+  document.addEventListener('change', function(e){
+    if(e.target.matches && e.target.matches('[data-iter-date]')){
+      const [length, idx] = e.target.dataset.iterDate.split('-');
+      setIterationDate(length, parseInt(idx, 10), e.target.value);
+    }
+  });
+
+  // Station edits auto-save (focusout after stopEditing)
+  document.addEventListener('focusout', function(e){
+    if(e.target.closest && e.target.closest('.station-card, [data-field]')){
+      setTimeout(saveState, 80);
+    }
+  });
+
+  // JSON toolbar
+  const exportBtn = document.getElementById('exportJsonBtn');
+  const importBtn = document.getElementById('importJsonBtn');
+  const importInput = document.getElementById('importJsonInput');
+  if(exportBtn) exportBtn.addEventListener('click', exportJson);
+  if(importBtn) importBtn.addEventListener('click', ()=> importInput && importInput.click());
+  if(importInput) importInput.addEventListener('change', function(e){
+    const file = e.target.files && e.target.files[0];
+    if(file) importJsonFile(file);
+    e.target.value = '';
+  });
+
+  // PDF buttons in the generator area — switch from mock alert to real print
+  document.querySelectorAll('.gen-option').forEach(b => {
+    const clone = b.cloneNode(true);
+    b.parentNode.replaceChild(clone, b);
+    clone.addEventListener('click', function(){
+      const layout = clone.dataset.layout || 'uebersicht';
+      printPdf(layout);
+    });
+  });
+
+  // ─────────── INIT ─────────────────────────────────────────
+  function init(){
+    const saved = loadState();
+    if(saved){
+      if(saved.pitches) STATE.pitches = Object.assign(STATE.pitches, saved.pitches);
+      if(saved.iterations){
+        ['long','mid','short'].forEach(k => {
+          if(Array.isArray(saved.iterations[k])){
+            // Guarantee at least 3 slots
+            const items = saved.iterations[k].slice();
+            while(items.length < 3) items.push({date:''});
+            STATE.iterations[k] = items;
+          }
+        });
+      }
+      if(Array.isArray(saved.stations) && saved.stations.length){
+        writeStationsToDom(saved.stations);
+      }
+    }
+
+    ['long','mid','short'].forEach(k => { renderPitch(k); renderIterations(k); });
+  }
+
+  if(document.readyState === 'loading'){
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
+
+})();
+</script>
+
+</body>
+</html>
